@@ -1,38 +1,37 @@
 """
-Policy engine: turns a list of findings into a single decision.
-
-Decision is one of: "allow", "redact", "block".
+Policy engine. Rule (derived from the labeled dataset, not guessed):
+  - any secret finding                          -> BLOCK
+  - national_id, ssn, credit_card                -> BLOCK
+  - email, phone found in structured data
+    (JSON/CSV-shaped payload)                    -> BLOCK
+  - email, phone found in plain text/log         -> REDACT
+  - no findings                                  -> ALLOW
 """
 
-from dataclasses import dataclass
-from enum import Enum
+import re
 
-from esys_detector.detectors.secrets import Finding
-
-
-class Decision(str, Enum):
-    ALLOW = "allow"
-    REDACT = "redact"
-    BLOCK = "block"
+STRUCTURED_HINT_RE = re.compile(r'[{\[].*".*":.*[}\]]|,\w.*,\w.*,', re.DOTALL)
 
 
-@dataclass
-class PolicyResult:
-    decision: Decision
-    findings: list[Finding]
-    redacted_payload: str | None = None  # only set when decision == REDACT
+def _looks_structured(payload: str) -> bool:
+    """Heuristic: payload contains a JSON object/array or a comma-delimited
+    row (CSV-like), as opposed to plain prose or a log line."""
+    return bool(STRUCTURED_HINT_RE.search(payload))
 
 
-def evaluate(payload: str, findings: list[Finding]) -> PolicyResult:
-    """
-    TODO: define the default V1 policy. Suggested starting point:
-      - any "high" severity secret finding -> BLOCK
-      - PII findings only -> REDACT (mask the matched spans)
-      - no findings -> ALLOW
-    This should be overridable later by policy packs (planned, not V1).
-    """
+def decide(payload: str, findings: list[dict]) -> dict:
     if not findings:
-        return PolicyResult(decision=Decision.ALLOW, findings=[])
+        return {"action": "ALLOW", "findings": findings}
 
-    # TODO: implement real severity-based logic
-    return PolicyResult(decision=Decision.BLOCK, findings=findings)
+    block_subtypes = {"national_id", "ssn", "credit_card"}
+    has_secret = any(f["category"] == "secret" for f in findings)
+    has_block_pii = any(f["subtype"] in block_subtypes for f in findings)
+
+    if has_secret or has_block_pii:
+        return {"action": "BLOCK", "findings": findings}
+
+    # Remaining case: only email/phone findings
+    if _looks_structured(payload):
+        return {"action": "BLOCK", "findings": findings}
+
+    return {"action": "REDACT", "findings": findings}

@@ -1,0 +1,3862 @@
+[
+  {
+    "case_id": "baseline_0001",
+    "findings": [
+      {
+        "category": "pii",
+        "subtype": "email",
+        "offset_start": 96,
+        "offset_end": 117
+      }
+    ],
+    "decision": "REDACT"
+  },
+  {
+    "case_id": "baseline_0002",
+    "findings": [
+      {
+        "category": "pii",
+        "subtype": "email",
+        "offset_start": 53,
+        "offset_end": 70
+      },
+      {
+        "category": "pii",
+        "subtype": "phone",
+        "offset_start": 71,
+        "offset_end": 84
+      }
+    ],
+    "decision": "BLOCK"
+  },
+  {
+    "case_id": "baseline_0003",
+    "findings": [
+      {
+        "category": "secret",
+        "subtype": "db_connection_string",
+        "offset_start": 63,
+        "offset_end": 128
+      },
+      {
+        "category": "pii",
+        "subtype": "email",
+        "offset_start": 78,
+        "offset_end": 116
+      }
+    ],
+    "decision": "BLOCK"
+  },
+  {
+    "case_id": "baseline_0004",
+    "findings": [
+      {
+        "category": "pii",
+        "subtype": "email",
+        "offset_start": 55,
+        "offset_end": 72
+      },
+      {
+        "category": "pii",
+        "subtype": "phone",
+        "offset_start": 73,
+        "offset_end": 86
+      }
+    ],
+    "decision": "BLOCK"
+  },
+  {
+    "case_id": "baseline_0005",
+    "findings": [
+      {
+        "category": "pii",
+        "subtype": "email",
+        "offset_start": 55,
+        "offset_end": 72
+      },
+      {
+        "category": "pii",
+        "subtype": "phone",
+        "offset_start": 73,
+        "offset_end": 86
+      }
+    ],
+    "decision": "BLOCK"
+  },
+  {
+    "case_id": "baseline_0006",
+    "findings": [
+      {
+        "category": "secret",
+        "subtype": "oauth_token",
+        "offset_start": 43,
+        "offset_end": 78
+      }
+    ],
+    "decision": "BLOCK"
+  },
+  {
+    "case_id": "baseline_0007",
+    "findings": [
+      {
+        "category": "pii",
+        "subtype": "email",
+        "offset_start": 30,
+        "offset_end": 56
+      }
+    ],
+    "decision": "REDACT"
+  },
+  {
+    "case_id": "baseline_0008",
+    "findings": [],
+    "decision": "ALLOW"
+  },
+  {
+    "case_id": "baseline_0009",
+    "findings": [
+      {
+        "category": "secret",
+        "subtype": "jwt",
+        "offset_start": 22,
+        "offset_end": 195
+      }
+    ],
+    "decision": "BLOCK"
+  },
+  {
+    "case_id": "baseline_0010",
+    "findings": [
+      {
+        "category": "secret",
+        "subtype": "aws_access_key",
+        "offset_start": 32,
+        "offset_end": 60
+      }
+    ],
+    "decision": "BLOCK"
+  },
+  {
+    "case_id": "baseline_0011",
+    "findings": [
+      {
+        "category": "secret",
+        "subtype": "jwt",
+        "offset_start": 22,
+        "offset_end": 195
+      }
+    ],
+    "decision": "BLOCK"
+  },
+  {
+    "case_id": "baseline_0012",
+    "findings": [
+      {
+        "category": "pii",
+        "subtype": "email",
+        "offset_start": 96,
+        "offset_end": 117
+      }
+    ],
+    "decision": "REDACT"
+  },
+  {
+    "case_id": "baseline_0013",
+    "findings": [
+      {
+        "category": "pii",
+        "subtype": "phone",
+        "offset_start": 19,
+        "offset_end": 35
+      }
+    ],
+    "decision": "REDACT"
+  },
+  {
+    "case_id": "baseline_0014",
+    "findings": [
+      {
+        "category": "pii",
+        "subtype": "phone",
+        "offset_start": 19,
+        "offset_end": 35
+      }
+    ],
+    "decision": "REDACT"
+  },
+  {
+    "case_id": "baseline_0015",
+    "findings": [
+      {
+        "category": "pii",
+        "subtype": "email",
+        "offset_start": 27,
+        "offset_end": 56
+      },
+      {
+        "category": "pii",
+        "subtype": "email",
+        "offset_start": 81,
+        "offset_end": 103
+      }
+    ],
+    "decision": "REDACT"
+  },
+  {
+    "case_id": "baseline_0016",
+    "findings": [
+      {
+        "category": "secret",
+        "subtype": "aws_access_key",
+        "offset_start": 63,
+        "offset_end": 83
+      }
+    ],
+    "decision": "BLOCK"
+  },
+  {
+    "case_id": "baseline_0017",
+    "findings": [],
+    "decision": "ALLOW"
+  },
+  {
+    "case_id": "baseline_0018",
+    "findings": [
+      {
+        "category": "secret",
+        "subtype": "github_token",
+        "offset_start": 34,
+        "offset_end": 74
+      },
+      {
+        "category": "pii",
+        "subtype": "email",
+        "offset_start": 34,
+        "offset_end": 85
+      }
+    ],
+    "decision": "BLOCK"
+  },
+  {
+    "case_id": "baseline_0019",
+    "findings": [
+      {
+        "category": "secret",
+        "subtype": "db_connection_string",
+        "offset_start": 63,
+        "offset_end": 131
+      },
+      {
+        "category": "pii",
+        "subtype": "email",
+        "offset_start": 81,
+        "offset_end": 119
+      }
+    ],
+    "decision": "BLOCK"
+  },
+  {
+    "case_id": "baseline_0020",
+    "findings": [],
+    "decision": "ALLOW"
+  },
+  {
+    "case_id": "baseline_0021",
+    "findings": [],
+    "decision": "ALLOW"
+  },
+  {
+    "case_id": "baseline_0022",
+    "findings": [],
+    "decision": "ALLOW"
+  },
+  {
+    "case_id": "baseline_0023",
+    "findings": [
+      {
+        "category": "secret",
+        "subtype": "aws_access_key",
+        "offset_start": 63,
+        "offset_end": 83
+      }
+    ],
+    "decision": "BLOCK"
+  },
+  {
+    "case_id": "baseline_0024",
+    "findings": [
+      {
+        "category": "secret",
+        "subtype": "jwt",
+        "offset_start": 22,
+        "offset_end": 195
+      }
+    ],
+    "decision": "BLOCK"
+  },
+  {
+    "case_id": "baseline_0025",
+    "findings": [
+      {
+        "category": "secret",
+        "subtype": "azure_key",
+        "offset_start": 88,
+        "offset_end": 132
+      }
+    ],
+    "decision": "BLOCK"
+  },
+  {
+    "case_id": "baseline_0026",
+    "findings": [
+      {
+        "category": "pii",
+        "subtype": "phone",
+        "offset_start": 19,
+        "offset_end": 35
+      }
+    ],
+    "decision": "REDACT"
+  },
+  {
+    "case_id": "baseline_0027",
+    "findings": [
+      {
+        "category": "secret",
+        "subtype": "aws_access_key",
+        "offset_start": 32,
+        "offset_end": 60
+      }
+    ],
+    "decision": "BLOCK"
+  },
+  {
+    "case_id": "baseline_0028",
+    "findings": [
+      {
+        "category": "secret",
+        "subtype": "github_token",
+        "offset_start": 34,
+        "offset_end": 74
+      },
+      {
+        "category": "pii",
+        "subtype": "email",
+        "offset_start": 34,
+        "offset_end": 85
+      }
+    ],
+    "decision": "BLOCK"
+  },
+  {
+    "case_id": "baseline_0029",
+    "findings": [
+      {
+        "category": "pii",
+        "subtype": "phone",
+        "offset_start": 19,
+        "offset_end": 35
+      }
+    ],
+    "decision": "REDACT"
+  },
+  {
+    "case_id": "baseline_0030",
+    "findings": [
+      {
+        "category": "secret",
+        "subtype": "db_connection_string",
+        "offset_start": 63,
+        "offset_end": 131
+      },
+      {
+        "category": "pii",
+        "subtype": "email",
+        "offset_start": 81,
+        "offset_end": 119
+      }
+    ],
+    "decision": "BLOCK"
+  },
+  {
+    "case_id": "baseline_0031",
+    "findings": [
+      {
+        "category": "secret",
+        "subtype": "aws_access_key",
+        "offset_start": 32,
+        "offset_end": 60
+      }
+    ],
+    "decision": "BLOCK"
+  },
+  {
+    "case_id": "baseline_0032",
+    "findings": [],
+    "decision": "ALLOW"
+  },
+  {
+    "case_id": "baseline_0033",
+    "findings": [],
+    "decision": "ALLOW"
+  },
+  {
+    "case_id": "baseline_0034",
+    "findings": [],
+    "decision": "ALLOW"
+  },
+  {
+    "case_id": "baseline_0035",
+    "findings": [],
+    "decision": "ALLOW"
+  },
+  {
+    "case_id": "baseline_0036",
+    "findings": [
+      {
+        "category": "secret",
+        "subtype": "jwt",
+        "offset_start": 22,
+        "offset_end": 195
+      }
+    ],
+    "decision": "BLOCK"
+  },
+  {
+    "case_id": "baseline_0037",
+    "findings": [
+      {
+        "category": "pii",
+        "subtype": "email",
+        "offset_start": 27,
+        "offset_end": 52
+      },
+      {
+        "category": "pii",
+        "subtype": "email",
+        "offset_start": 77,
+        "offset_end": 99
+      }
+    ],
+    "decision": "REDACT"
+  },
+  {
+    "case_id": "baseline_0038",
+    "findings": [
+      {
+        "category": "pii",
+        "subtype": "phone",
+        "offset_start": 19,
+        "offset_end": 35
+      }
+    ],
+    "decision": "REDACT"
+  },
+  {
+    "case_id": "baseline_0039",
+    "findings": [],
+    "decision": "ALLOW"
+  },
+  {
+    "case_id": "baseline_0040",
+    "findings": [
+      {
+        "category": "pii",
+        "subtype": "national_id",
+        "offset_start": 37,
+        "offset_end": 50
+      }
+    ],
+    "decision": "BLOCK"
+  },
+  {
+    "case_id": "baseline_0041",
+    "findings": [],
+    "decision": "ALLOW"
+  },
+  {
+    "case_id": "baseline_0042",
+    "findings": [
+      {
+        "category": "pii",
+        "subtype": "phone",
+        "offset_start": 39,
+        "offset_end": 55
+      }
+    ],
+    "decision": "REDACT"
+  },
+  {
+    "case_id": "baseline_0043",
+    "findings": [
+      {
+        "category": "secret",
+        "subtype": "db_connection_string",
+        "offset_start": 63,
+        "offset_end": 146
+      },
+      {
+        "category": "pii",
+        "subtype": "email",
+        "offset_start": 84,
+        "offset_end": 122
+      }
+    ],
+    "decision": "BLOCK"
+  },
+  {
+    "case_id": "baseline_0044",
+    "findings": [
+      {
+        "category": "pii",
+        "subtype": "phone",
+        "offset_start": 19,
+        "offset_end": 35
+      }
+    ],
+    "decision": "REDACT"
+  },
+  {
+    "case_id": "baseline_0045",
+    "findings": [
+      {
+        "category": "pii",
+        "subtype": "email",
+        "offset_start": 27,
+        "offset_end": 49
+      },
+      {
+        "category": "pii",
+        "subtype": "email",
+        "offset_start": 74,
+        "offset_end": 96
+      }
+    ],
+    "decision": "REDACT"
+  },
+  {
+    "case_id": "baseline_0046",
+    "findings": [
+      {
+        "category": "secret",
+        "subtype": "aws_access_key",
+        "offset_start": 32,
+        "offset_end": 60
+      }
+    ],
+    "decision": "BLOCK"
+  },
+  {
+    "case_id": "baseline_0047",
+    "findings": [
+      {
+        "category": "pii",
+        "subtype": "email",
+        "offset_start": 126,
+        "offset_end": 145
+      },
+      {
+        "category": "pii",
+        "subtype": "credit_card",
+        "offset_start": 159,
+        "offset_end": 175
+      }
+    ],
+    "decision": "BLOCK"
+  },
+  {
+    "case_id": "baseline_0048",
+    "findings": [],
+    "decision": "ALLOW"
+  },
+  {
+    "case_id": "baseline_0049",
+    "findings": [],
+    "decision": "ALLOW"
+  },
+  {
+    "case_id": "baseline_0050",
+    "findings": [
+      {
+        "category": "secret",
+        "subtype": "db_connection_string",
+        "offset_start": 63,
+        "offset_end": 128
+      },
+      {
+        "category": "pii",
+        "subtype": "email",
+        "offset_start": 78,
+        "offset_end": 116
+      }
+    ],
+    "decision": "BLOCK"
+  },
+  {
+    "case_id": "baseline_0051",
+    "findings": [],
+    "decision": "ALLOW"
+  },
+  {
+    "case_id": "baseline_0052",
+    "findings": [
+      {
+        "category": "pii",
+        "subtype": "phone",
+        "offset_start": 19,
+        "offset_end": 35
+      }
+    ],
+    "decision": "REDACT"
+  },
+  {
+    "case_id": "baseline_0053",
+    "findings": [
+      {
+        "category": "pii",
+        "subtype": "phone",
+        "offset_start": 19,
+        "offset_end": 35
+      }
+    ],
+    "decision": "REDACT"
+  },
+  {
+    "case_id": "baseline_0054",
+    "findings": [
+      {
+        "category": "secret",
+        "subtype": "aws_access_key",
+        "offset_start": 32,
+        "offset_end": 60
+      }
+    ],
+    "decision": "BLOCK"
+  },
+  {
+    "case_id": "baseline_0055",
+    "findings": [
+      {
+        "category": "secret",
+        "subtype": "oauth_token",
+        "offset_start": 67,
+        "offset_end": 219
+      }
+    ],
+    "decision": "BLOCK"
+  },
+  {
+    "case_id": "baseline_0056",
+    "findings": [
+      {
+        "category": "secret",
+        "subtype": "db_connection_string",
+        "offset_start": 63,
+        "offset_end": 128
+      },
+      {
+        "category": "pii",
+        "subtype": "email",
+        "offset_start": 78,
+        "offset_end": 116
+      }
+    ],
+    "decision": "BLOCK"
+  },
+  {
+    "case_id": "baseline_0057",
+    "findings": [],
+    "decision": "ALLOW"
+  },
+  {
+    "case_id": "baseline_0058",
+    "findings": [
+      {
+        "category": "pii",
+        "subtype": "phone",
+        "offset_start": 19,
+        "offset_end": 35
+      }
+    ],
+    "decision": "REDACT"
+  },
+  {
+    "case_id": "baseline_0059",
+    "findings": [
+      {
+        "category": "secret",
+        "subtype": "gcp_service_account",
+        "offset_start": 188,
+        "offset_end": 215
+      },
+      {
+        "category": "pii",
+        "subtype": "email",
+        "offset_start": 468,
+        "offset_end": 507
+      }
+    ],
+    "decision": "BLOCK"
+  },
+  {
+    "case_id": "baseline_0060",
+    "findings": [
+      {
+        "category": "pii",
+        "subtype": "email",
+        "offset_start": 96,
+        "offset_end": 117
+      }
+    ],
+    "decision": "REDACT"
+  },
+  {
+    "case_id": "baseline_0061",
+    "findings": [],
+    "decision": "ALLOW"
+  },
+  {
+    "case_id": "baseline_0062",
+    "findings": [
+      {
+        "category": "pii",
+        "subtype": "email",
+        "offset_start": 121,
+        "offset_end": 140
+      },
+      {
+        "category": "pii",
+        "subtype": "credit_card",
+        "offset_start": 154,
+        "offset_end": 170
+      }
+    ],
+    "decision": "BLOCK"
+  },
+  {
+    "case_id": "baseline_0063",
+    "findings": [
+      {
+        "category": "pii",
+        "subtype": "email",
+        "offset_start": 96,
+        "offset_end": 117
+      }
+    ],
+    "decision": "REDACT"
+  },
+  {
+    "case_id": "baseline_0064",
+    "findings": [],
+    "decision": "ALLOW"
+  },
+  {
+    "case_id": "baseline_0065",
+    "findings": [
+      {
+        "category": "pii",
+        "subtype": "email",
+        "offset_start": 27,
+        "offset_end": 52
+      },
+      {
+        "category": "pii",
+        "subtype": "email",
+        "offset_start": 77,
+        "offset_end": 99
+      }
+    ],
+    "decision": "REDACT"
+  },
+  {
+    "case_id": "baseline_0066",
+    "findings": [],
+    "decision": "ALLOW"
+  },
+  {
+    "case_id": "baseline_0067",
+    "findings": [
+      {
+        "category": "pii",
+        "subtype": "email",
+        "offset_start": 27,
+        "offset_end": 49
+      },
+      {
+        "category": "pii",
+        "subtype": "email",
+        "offset_start": 74,
+        "offset_end": 96
+      }
+    ],
+    "decision": "REDACT"
+  },
+  {
+    "case_id": "baseline_0068",
+    "findings": [
+      {
+        "category": "secret",
+        "subtype": "db_connection_string",
+        "offset_start": 63,
+        "offset_end": 146
+      },
+      {
+        "category": "pii",
+        "subtype": "email",
+        "offset_start": 84,
+        "offset_end": 122
+      }
+    ],
+    "decision": "BLOCK"
+  },
+  {
+    "case_id": "baseline_0069",
+    "findings": [
+      {
+        "category": "secret",
+        "subtype": "github_token",
+        "offset_start": 34,
+        "offset_end": 74
+      },
+      {
+        "category": "pii",
+        "subtype": "email",
+        "offset_start": 34,
+        "offset_end": 85
+      }
+    ],
+    "decision": "BLOCK"
+  },
+  {
+    "case_id": "baseline_0070",
+    "findings": [],
+    "decision": "ALLOW"
+  },
+  {
+    "case_id": "baseline_0071",
+    "findings": [],
+    "decision": "ALLOW"
+  },
+  {
+    "case_id": "baseline_0072",
+    "findings": [
+      {
+        "category": "secret",
+        "subtype": "github_token",
+        "offset_start": 34,
+        "offset_end": 74
+      },
+      {
+        "category": "pii",
+        "subtype": "email",
+        "offset_start": 34,
+        "offset_end": 85
+      }
+    ],
+    "decision": "BLOCK"
+  },
+  {
+    "case_id": "baseline_0073",
+    "findings": [
+      {
+        "category": "pii",
+        "subtype": "email",
+        "offset_start": 96,
+        "offset_end": 117
+      }
+    ],
+    "decision": "REDACT"
+  },
+  {
+    "case_id": "baseline_0074",
+    "findings": [
+      {
+        "category": "pii",
+        "subtype": "email",
+        "offset_start": 30,
+        "offset_end": 55
+      }
+    ],
+    "decision": "REDACT"
+  },
+  {
+    "case_id": "baseline_0075",
+    "findings": [
+      {
+        "category": "secret",
+        "subtype": "github_token",
+        "offset_start": 34,
+        "offset_end": 74
+      },
+      {
+        "category": "pii",
+        "subtype": "email",
+        "offset_start": 34,
+        "offset_end": 85
+      }
+    ],
+    "decision": "BLOCK"
+  },
+  {
+    "case_id": "baseline_0076",
+    "findings": [
+      {
+        "category": "pii",
+        "subtype": "ssn",
+        "offset_start": 48,
+        "offset_end": 59
+      }
+    ],
+    "decision": "BLOCK"
+  },
+  {
+    "case_id": "baseline_0077",
+    "findings": [
+      {
+        "category": "secret",
+        "subtype": "aws_access_key",
+        "offset_start": 63,
+        "offset_end": 83
+      }
+    ],
+    "decision": "BLOCK"
+  },
+  {
+    "case_id": "baseline_0078",
+    "findings": [
+      {
+        "category": "secret",
+        "subtype": "aws_access_key",
+        "offset_start": 63,
+        "offset_end": 83
+      }
+    ],
+    "decision": "BLOCK"
+  },
+  {
+    "case_id": "baseline_0079",
+    "findings": [
+      {
+        "category": "secret",
+        "subtype": "github_token",
+        "offset_start": 34,
+        "offset_end": 74
+      },
+      {
+        "category": "pii",
+        "subtype": "email",
+        "offset_start": 34,
+        "offset_end": 85
+      }
+    ],
+    "decision": "BLOCK"
+  },
+  {
+    "case_id": "baseline_0080",
+    "findings": [
+      {
+        "category": "pii",
+        "subtype": "email",
+        "offset_start": 27,
+        "offset_end": 54
+      },
+      {
+        "category": "pii",
+        "subtype": "email",
+        "offset_start": 79,
+        "offset_end": 101
+      }
+    ],
+    "decision": "REDACT"
+  },
+  {
+    "case_id": "baseline_0081",
+    "findings": [
+      {
+        "category": "pii",
+        "subtype": "national_id",
+        "offset_start": 37,
+        "offset_end": 50
+      }
+    ],
+    "decision": "BLOCK"
+  },
+  {
+    "case_id": "baseline_0082",
+    "findings": [],
+    "decision": "ALLOW"
+  },
+  {
+    "case_id": "baseline_0083",
+    "findings": [
+      {
+        "category": "secret",
+        "subtype": "ssh_private_key",
+        "offset_start": 0,
+        "offset_end": 35
+      }
+    ],
+    "decision": "BLOCK"
+  },
+  {
+    "case_id": "baseline_0084",
+    "findings": [],
+    "decision": "ALLOW"
+  },
+  {
+    "case_id": "baseline_0085",
+    "findings": [
+      {
+        "category": "pii",
+        "subtype": "email",
+        "offset_start": 96,
+        "offset_end": 117
+      }
+    ],
+    "decision": "REDACT"
+  },
+  {
+    "case_id": "baseline_0086",
+    "findings": [
+      {
+        "category": "secret",
+        "subtype": "oauth_token",
+        "offset_start": 67,
+        "offset_end": 219
+      }
+    ],
+    "decision": "BLOCK"
+  },
+  {
+    "case_id": "baseline_0087",
+    "findings": [
+      {
+        "category": "pii",
+        "subtype": "national_id",
+        "offset_start": 37,
+        "offset_end": 50
+      }
+    ],
+    "decision": "BLOCK"
+  },
+  {
+    "case_id": "baseline_0088",
+    "findings": [],
+    "decision": "ALLOW"
+  },
+  {
+    "case_id": "baseline_0089",
+    "findings": [
+      {
+        "category": "secret",
+        "subtype": "oauth_token",
+        "offset_start": 43,
+        "offset_end": 78
+      }
+    ],
+    "decision": "BLOCK"
+  },
+  {
+    "case_id": "baseline_0090",
+    "findings": [
+      {
+        "category": "secret",
+        "subtype": "jwt",
+        "offset_start": 22,
+        "offset_end": 195
+      }
+    ],
+    "decision": "BLOCK"
+  },
+  {
+    "case_id": "baseline_0091",
+    "findings": [
+      {
+        "category": "secret",
+        "subtype": "oauth_token",
+        "offset_start": 67,
+        "offset_end": 219
+      }
+    ],
+    "decision": "BLOCK"
+  },
+  {
+    "case_id": "baseline_0092",
+    "findings": [
+      {
+        "category": "secret",
+        "subtype": "aws_access_key",
+        "offset_start": 11,
+        "offset_end": 36
+      }
+    ],
+    "decision": "BLOCK"
+  },
+  {
+    "case_id": "baseline_0093",
+    "findings": [
+      {
+        "category": "secret",
+        "subtype": "aws_access_key",
+        "offset_start": 63,
+        "offset_end": 83
+      }
+    ],
+    "decision": "BLOCK"
+  },
+  {
+    "case_id": "baseline_0094",
+    "findings": [
+      {
+        "category": "pii",
+        "subtype": "phone",
+        "offset_start": 19,
+        "offset_end": 35
+      }
+    ],
+    "decision": "REDACT"
+  },
+  {
+    "case_id": "baseline_0095",
+    "findings": [
+      {
+        "category": "pii",
+        "subtype": "ssn",
+        "offset_start": 48,
+        "offset_end": 59
+      }
+    ],
+    "decision": "BLOCK"
+  },
+  {
+    "case_id": "baseline_0096",
+    "findings": [
+      {
+        "category": "pii",
+        "subtype": "ssn",
+        "offset_start": 48,
+        "offset_end": 59
+      }
+    ],
+    "decision": "BLOCK"
+  },
+  {
+    "case_id": "baseline_0097",
+    "findings": [],
+    "decision": "ALLOW"
+  },
+  {
+    "case_id": "baseline_0098",
+    "findings": [
+      {
+        "category": "secret",
+        "subtype": "jwt",
+        "offset_start": 22,
+        "offset_end": 195
+      }
+    ],
+    "decision": "BLOCK"
+  },
+  {
+    "case_id": "baseline_0099",
+    "findings": [
+      {
+        "category": "pii",
+        "subtype": "national_id",
+        "offset_start": 37,
+        "offset_end": 50
+      }
+    ],
+    "decision": "BLOCK"
+  },
+  {
+    "case_id": "baseline_0100",
+    "findings": [
+      {
+        "category": "secret",
+        "subtype": "jwt",
+        "offset_start": 22,
+        "offset_end": 195
+      }
+    ],
+    "decision": "BLOCK"
+  },
+  {
+    "case_id": "baseline_0101",
+    "findings": [
+      {
+        "category": "secret",
+        "subtype": "db_connection_string",
+        "offset_start": 63,
+        "offset_end": 128
+      },
+      {
+        "category": "pii",
+        "subtype": "email",
+        "offset_start": 78,
+        "offset_end": 116
+      }
+    ],
+    "decision": "BLOCK"
+  },
+  {
+    "case_id": "baseline_0102",
+    "findings": [
+      {
+        "category": "secret",
+        "subtype": "db_connection_string",
+        "offset_start": 63,
+        "offset_end": 131
+      },
+      {
+        "category": "pii",
+        "subtype": "email",
+        "offset_start": 81,
+        "offset_end": 119
+      }
+    ],
+    "decision": "BLOCK"
+  },
+  {
+    "case_id": "baseline_0103",
+    "findings": [
+      {
+        "category": "secret",
+        "subtype": "github_token",
+        "offset_start": 34,
+        "offset_end": 74
+      },
+      {
+        "category": "pii",
+        "subtype": "email",
+        "offset_start": 34,
+        "offset_end": 85
+      }
+    ],
+    "decision": "BLOCK"
+  },
+  {
+    "case_id": "baseline_0104",
+    "findings": [],
+    "decision": "ALLOW"
+  },
+  {
+    "case_id": "baseline_0105",
+    "findings": [
+      {
+        "category": "secret",
+        "subtype": "ssh_private_key",
+        "offset_start": 0,
+        "offset_end": 35
+      }
+    ],
+    "decision": "BLOCK"
+  },
+  {
+    "case_id": "baseline_0106",
+    "findings": [
+      {
+        "category": "pii",
+        "subtype": "email",
+        "offset_start": 55,
+        "offset_end": 72
+      },
+      {
+        "category": "pii",
+        "subtype": "phone",
+        "offset_start": 73,
+        "offset_end": 86
+      }
+    ],
+    "decision": "BLOCK"
+  },
+  {
+    "case_id": "baseline_0107",
+    "findings": [
+      {
+        "category": "secret",
+        "subtype": "oauth_token",
+        "offset_start": 43,
+        "offset_end": 78
+      }
+    ],
+    "decision": "BLOCK"
+  },
+  {
+    "case_id": "baseline_0108",
+    "findings": [
+      {
+        "category": "pii",
+        "subtype": "phone",
+        "offset_start": 39,
+        "offset_end": 55
+      }
+    ],
+    "decision": "REDACT"
+  },
+  {
+    "case_id": "baseline_0109",
+    "findings": [
+      {
+        "category": "pii",
+        "subtype": "phone",
+        "offset_start": 39,
+        "offset_end": 55
+      }
+    ],
+    "decision": "REDACT"
+  },
+  {
+    "case_id": "baseline_0110",
+    "findings": [
+      {
+        "category": "pii",
+        "subtype": "email",
+        "offset_start": 27,
+        "offset_end": 53
+      },
+      {
+        "category": "pii",
+        "subtype": "email",
+        "offset_start": 78,
+        "offset_end": 100
+      }
+    ],
+    "decision": "REDACT"
+  },
+  {
+    "case_id": "baseline_0111",
+    "findings": [
+      {
+        "category": "pii",
+        "subtype": "email",
+        "offset_start": 52,
+        "offset_end": 69
+      },
+      {
+        "category": "pii",
+        "subtype": "phone",
+        "offset_start": 70,
+        "offset_end": 83
+      }
+    ],
+    "decision": "BLOCK"
+  },
+  {
+    "case_id": "baseline_0112",
+    "findings": [],
+    "decision": "ALLOW"
+  },
+  {
+    "case_id": "baseline_0113",
+    "findings": [
+      {
+        "category": "pii",
+        "subtype": "email",
+        "offset_start": 27,
+        "offset_end": 52
+      },
+      {
+        "category": "pii",
+        "subtype": "email",
+        "offset_start": 77,
+        "offset_end": 99
+      }
+    ],
+    "decision": "REDACT"
+  },
+  {
+    "case_id": "baseline_0114",
+    "findings": [
+      {
+        "category": "secret",
+        "subtype": "oauth_token",
+        "offset_start": 67,
+        "offset_end": 219
+      }
+    ],
+    "decision": "BLOCK"
+  },
+  {
+    "case_id": "baseline_0115",
+    "findings": [
+      {
+        "category": "secret",
+        "subtype": "aws_access_key",
+        "offset_start": 63,
+        "offset_end": 83
+      }
+    ],
+    "decision": "BLOCK"
+  },
+  {
+    "case_id": "baseline_0116",
+    "findings": [],
+    "decision": "ALLOW"
+  },
+  {
+    "case_id": "baseline_0117",
+    "findings": [],
+    "decision": "ALLOW"
+  },
+  {
+    "case_id": "baseline_0118",
+    "findings": [],
+    "decision": "ALLOW"
+  },
+  {
+    "case_id": "baseline_0119",
+    "findings": [
+      {
+        "category": "secret",
+        "subtype": "aws_access_key",
+        "offset_start": 32,
+        "offset_end": 60
+      }
+    ],
+    "decision": "BLOCK"
+  },
+  {
+    "case_id": "baseline_0120",
+    "findings": [],
+    "decision": "ALLOW"
+  },
+  {
+    "case_id": "baseline_0121",
+    "findings": [
+      {
+        "category": "pii",
+        "subtype": "phone",
+        "offset_start": 44,
+        "offset_end": 60
+      }
+    ],
+    "decision": "REDACT"
+  },
+  {
+    "case_id": "baseline_0122",
+    "findings": [
+      {
+        "category": "secret",
+        "subtype": "ssh_private_key",
+        "offset_start": 0,
+        "offset_end": 35
+      }
+    ],
+    "decision": "BLOCK"
+  },
+  {
+    "case_id": "baseline_0123",
+    "findings": [
+      {
+        "category": "pii",
+        "subtype": "phone",
+        "offset_start": 19,
+        "offset_end": 35
+      }
+    ],
+    "decision": "REDACT"
+  },
+  {
+    "case_id": "baseline_0124",
+    "findings": [
+      {
+        "category": "secret",
+        "subtype": "oauth_token",
+        "offset_start": 67,
+        "offset_end": 219
+      }
+    ],
+    "decision": "BLOCK"
+  },
+  {
+    "case_id": "baseline_0125",
+    "findings": [
+      {
+        "category": "secret",
+        "subtype": "oauth_token",
+        "offset_start": 67,
+        "offset_end": 219
+      }
+    ],
+    "decision": "BLOCK"
+  },
+  {
+    "case_id": "baseline_0126",
+    "findings": [
+      {
+        "category": "pii",
+        "subtype": "national_id",
+        "offset_start": 37,
+        "offset_end": 50
+      }
+    ],
+    "decision": "BLOCK"
+  },
+  {
+    "case_id": "baseline_0127",
+    "findings": [
+      {
+        "category": "pii",
+        "subtype": "email",
+        "offset_start": 57,
+        "offset_end": 74
+      },
+      {
+        "category": "pii",
+        "subtype": "phone",
+        "offset_start": 75,
+        "offset_end": 88
+      }
+    ],
+    "decision": "BLOCK"
+  },
+  {
+    "case_id": "baseline_0128",
+    "findings": [],
+    "decision": "ALLOW"
+  },
+  {
+    "case_id": "baseline_0129",
+    "findings": [],
+    "decision": "ALLOW"
+  },
+  {
+    "case_id": "baseline_0130",
+    "findings": [
+      {
+        "category": "secret",
+        "subtype": "db_connection_string",
+        "offset_start": 63,
+        "offset_end": 128
+      },
+      {
+        "category": "pii",
+        "subtype": "email",
+        "offset_start": 78,
+        "offset_end": 116
+      }
+    ],
+    "decision": "BLOCK"
+  },
+  {
+    "case_id": "baseline_0131",
+    "findings": [],
+    "decision": "ALLOW"
+  },
+  {
+    "case_id": "baseline_0132",
+    "findings": [
+      {
+        "category": "secret",
+        "subtype": "aws_access_key",
+        "offset_start": 11,
+        "offset_end": 36
+      }
+    ],
+    "decision": "BLOCK"
+  },
+  {
+    "case_id": "baseline_0133",
+    "findings": [
+      {
+        "category": "pii",
+        "subtype": "email",
+        "offset_start": 123,
+        "offset_end": 142
+      },
+      {
+        "category": "pii",
+        "subtype": "credit_card",
+        "offset_start": 156,
+        "offset_end": 172
+      }
+    ],
+    "decision": "BLOCK"
+  },
+  {
+    "case_id": "baseline_0134",
+    "findings": [
+      {
+        "category": "secret",
+        "subtype": "aws_access_key",
+        "offset_start": 32,
+        "offset_end": 60
+      }
+    ],
+    "decision": "BLOCK"
+  },
+  {
+    "case_id": "baseline_0135",
+    "findings": [
+      {
+        "category": "pii",
+        "subtype": "ssn",
+        "offset_start": 48,
+        "offset_end": 59
+      }
+    ],
+    "decision": "BLOCK"
+  },
+  {
+    "case_id": "baseline_0136",
+    "findings": [
+      {
+        "category": "secret",
+        "subtype": "aws_access_key",
+        "offset_start": 63,
+        "offset_end": 83
+      }
+    ],
+    "decision": "BLOCK"
+  },
+  {
+    "case_id": "baseline_0137",
+    "findings": [
+      {
+        "category": "pii",
+        "subtype": "email",
+        "offset_start": 27,
+        "offset_end": 55
+      },
+      {
+        "category": "pii",
+        "subtype": "email",
+        "offset_start": 80,
+        "offset_end": 102
+      }
+    ],
+    "decision": "REDACT"
+  },
+  {
+    "case_id": "baseline_0138",
+    "findings": [
+      {
+        "category": "secret",
+        "subtype": "oauth_token",
+        "offset_start": 67,
+        "offset_end": 219
+      }
+    ],
+    "decision": "BLOCK"
+  },
+  {
+    "case_id": "baseline_0139",
+    "findings": [
+      {
+        "category": "secret",
+        "subtype": "jwt",
+        "offset_start": 22,
+        "offset_end": 195
+      }
+    ],
+    "decision": "BLOCK"
+  },
+  {
+    "case_id": "baseline_0140",
+    "findings": [
+      {
+        "category": "pii",
+        "subtype": "email",
+        "offset_start": 96,
+        "offset_end": 117
+      }
+    ],
+    "decision": "REDACT"
+  },
+  {
+    "case_id": "baseline_0141",
+    "findings": [
+      {
+        "category": "pii",
+        "subtype": "phone",
+        "offset_start": 19,
+        "offset_end": 35
+      }
+    ],
+    "decision": "REDACT"
+  },
+  {
+    "case_id": "baseline_0142",
+    "findings": [
+      {
+        "category": "secret",
+        "subtype": "ssh_private_key",
+        "offset_start": 0,
+        "offset_end": 35
+      }
+    ],
+    "decision": "BLOCK"
+  },
+  {
+    "case_id": "baseline_0143",
+    "findings": [
+      {
+        "category": "pii",
+        "subtype": "email",
+        "offset_start": 27,
+        "offset_end": 54
+      },
+      {
+        "category": "pii",
+        "subtype": "email",
+        "offset_start": 79,
+        "offset_end": 101
+      }
+    ],
+    "decision": "REDACT"
+  },
+  {
+    "case_id": "baseline_0144",
+    "findings": [
+      {
+        "category": "secret",
+        "subtype": "oauth_token",
+        "offset_start": 43,
+        "offset_end": 78
+      }
+    ],
+    "decision": "BLOCK"
+  },
+  {
+    "case_id": "baseline_0145",
+    "findings": [],
+    "decision": "ALLOW"
+  },
+  {
+    "case_id": "baseline_0146",
+    "findings": [
+      {
+        "category": "secret",
+        "subtype": "aws_access_key",
+        "offset_start": 63,
+        "offset_end": 83
+      }
+    ],
+    "decision": "BLOCK"
+  },
+  {
+    "case_id": "baseline_0147",
+    "findings": [
+      {
+        "category": "pii",
+        "subtype": "email",
+        "offset_start": 54,
+        "offset_end": 71
+      },
+      {
+        "category": "pii",
+        "subtype": "phone",
+        "offset_start": 72,
+        "offset_end": 85
+      }
+    ],
+    "decision": "BLOCK"
+  },
+  {
+    "case_id": "baseline_0148",
+    "findings": [],
+    "decision": "ALLOW"
+  },
+  {
+    "case_id": "baseline_0149",
+    "findings": [
+      {
+        "category": "pii",
+        "subtype": "email",
+        "offset_start": 56,
+        "offset_end": 73
+      },
+      {
+        "category": "pii",
+        "subtype": "phone",
+        "offset_start": 74,
+        "offset_end": 87
+      }
+    ],
+    "decision": "BLOCK"
+  },
+  {
+    "case_id": "baseline_0150",
+    "findings": [],
+    "decision": "ALLOW"
+  },
+  {
+    "case_id": "baseline_0151",
+    "findings": [
+      {
+        "category": "secret",
+        "subtype": "aws_access_key",
+        "offset_start": 11,
+        "offset_end": 36
+      }
+    ],
+    "decision": "BLOCK"
+  },
+  {
+    "case_id": "baseline_0152",
+    "findings": [
+      {
+        "category": "pii",
+        "subtype": "phone",
+        "offset_start": 40,
+        "offset_end": 56
+      }
+    ],
+    "decision": "REDACT"
+  },
+  {
+    "case_id": "baseline_0153",
+    "findings": [],
+    "decision": "ALLOW"
+  },
+  {
+    "case_id": "baseline_0154",
+    "findings": [
+      {
+        "category": "secret",
+        "subtype": "aws_access_key",
+        "offset_start": 63,
+        "offset_end": 83
+      }
+    ],
+    "decision": "BLOCK"
+  },
+  {
+    "case_id": "baseline_0155",
+    "findings": [],
+    "decision": "ALLOW"
+  },
+  {
+    "case_id": "baseline_0156",
+    "findings": [],
+    "decision": "ALLOW"
+  },
+  {
+    "case_id": "baseline_0157",
+    "findings": [
+      {
+        "category": "secret",
+        "subtype": "jwt",
+        "offset_start": 22,
+        "offset_end": 195
+      }
+    ],
+    "decision": "BLOCK"
+  },
+  {
+    "case_id": "baseline_0158",
+    "findings": [
+      {
+        "category": "secret",
+        "subtype": "oauth_token",
+        "offset_start": 41,
+        "offset_end": 81
+      }
+    ],
+    "decision": "BLOCK"
+  },
+  {
+    "case_id": "baseline_0159",
+    "findings": [
+      {
+        "category": "secret",
+        "subtype": "gcp_service_account",
+        "offset_start": 188,
+        "offset_end": 215
+      },
+      {
+        "category": "pii",
+        "subtype": "email",
+        "offset_start": 468,
+        "offset_end": 507
+      }
+    ],
+    "decision": "BLOCK"
+  },
+  {
+    "case_id": "baseline_0160",
+    "findings": [
+      {
+        "category": "pii",
+        "subtype": "email",
+        "offset_start": 27,
+        "offset_end": 55
+      },
+      {
+        "category": "pii",
+        "subtype": "email",
+        "offset_start": 80,
+        "offset_end": 102
+      }
+    ],
+    "decision": "REDACT"
+  },
+  {
+    "case_id": "baseline_0161",
+    "findings": [
+      {
+        "category": "pii",
+        "subtype": "email",
+        "offset_start": 122,
+        "offset_end": 141
+      },
+      {
+        "category": "pii",
+        "subtype": "credit_card",
+        "offset_start": 155,
+        "offset_end": 171
+      }
+    ],
+    "decision": "BLOCK"
+  },
+  {
+    "case_id": "baseline_0162",
+    "findings": [
+      {
+        "category": "secret",
+        "subtype": "ssh_private_key",
+        "offset_start": 0,
+        "offset_end": 35
+      }
+    ],
+    "decision": "BLOCK"
+  },
+  {
+    "case_id": "baseline_0163",
+    "findings": [
+      {
+        "category": "pii",
+        "subtype": "ssn",
+        "offset_start": 48,
+        "offset_end": 59
+      }
+    ],
+    "decision": "BLOCK"
+  },
+  {
+    "case_id": "baseline_0164",
+    "findings": [],
+    "decision": "ALLOW"
+  },
+  {
+    "case_id": "baseline_0165",
+    "findings": [
+      {
+        "category": "secret",
+        "subtype": "azure_key",
+        "offset_start": 88,
+        "offset_end": 132
+      }
+    ],
+    "decision": "BLOCK"
+  },
+  {
+    "case_id": "baseline_0166",
+    "findings": [],
+    "decision": "ALLOW"
+  },
+  {
+    "case_id": "baseline_0167",
+    "findings": [
+      {
+        "category": "pii",
+        "subtype": "ssn",
+        "offset_start": 48,
+        "offset_end": 59
+      }
+    ],
+    "decision": "BLOCK"
+  },
+  {
+    "case_id": "baseline_0168",
+    "findings": [
+      {
+        "category": "pii",
+        "subtype": "email",
+        "offset_start": 30,
+        "offset_end": 57
+      }
+    ],
+    "decision": "REDACT"
+  },
+  {
+    "case_id": "baseline_0169",
+    "findings": [
+      {
+        "category": "secret",
+        "subtype": "oauth_token",
+        "offset_start": 41,
+        "offset_end": 81
+      }
+    ],
+    "decision": "BLOCK"
+  },
+  {
+    "case_id": "baseline_0170",
+    "findings": [],
+    "decision": "ALLOW"
+  },
+  {
+    "case_id": "baseline_0171",
+    "findings": [
+      {
+        "category": "pii",
+        "subtype": "email",
+        "offset_start": 125,
+        "offset_end": 144
+      },
+      {
+        "category": "pii",
+        "subtype": "credit_card",
+        "offset_start": 158,
+        "offset_end": 174
+      }
+    ],
+    "decision": "BLOCK"
+  },
+  {
+    "case_id": "baseline_0172",
+    "findings": [
+      {
+        "category": "secret",
+        "subtype": "azure_key",
+        "offset_start": 88,
+        "offset_end": 132
+      }
+    ],
+    "decision": "BLOCK"
+  },
+  {
+    "case_id": "baseline_0173",
+    "findings": [],
+    "decision": "ALLOW"
+  },
+  {
+    "case_id": "baseline_0174",
+    "findings": [],
+    "decision": "ALLOW"
+  },
+  {
+    "case_id": "baseline_0175",
+    "findings": [
+      {
+        "category": "pii",
+        "subtype": "email",
+        "offset_start": 122,
+        "offset_end": 141
+      },
+      {
+        "category": "pii",
+        "subtype": "credit_card",
+        "offset_start": 155,
+        "offset_end": 171
+      }
+    ],
+    "decision": "BLOCK"
+  },
+  {
+    "case_id": "baseline_0176",
+    "findings": [],
+    "decision": "ALLOW"
+  },
+  {
+    "case_id": "baseline_0177",
+    "findings": [
+      {
+        "category": "secret",
+        "subtype": "oauth_token",
+        "offset_start": 41,
+        "offset_end": 75
+      }
+    ],
+    "decision": "BLOCK"
+  },
+  {
+    "case_id": "baseline_0178",
+    "findings": [
+      {
+        "category": "secret",
+        "subtype": "oauth_token",
+        "offset_start": 41,
+        "offset_end": 75
+      }
+    ],
+    "decision": "BLOCK"
+  },
+  {
+    "case_id": "baseline_0179",
+    "findings": [
+      {
+        "category": "secret",
+        "subtype": "github_token",
+        "offset_start": 34,
+        "offset_end": 74
+      },
+      {
+        "category": "pii",
+        "subtype": "email",
+        "offset_start": 34,
+        "offset_end": 85
+      }
+    ],
+    "decision": "BLOCK"
+  },
+  {
+    "case_id": "baseline_0180",
+    "findings": [],
+    "decision": "ALLOW"
+  },
+  {
+    "case_id": "baseline_0181",
+    "findings": [
+      {
+        "category": "secret",
+        "subtype": "jwt",
+        "offset_start": 22,
+        "offset_end": 195
+      }
+    ],
+    "decision": "BLOCK"
+  },
+  {
+    "case_id": "baseline_0182",
+    "findings": [
+      {
+        "category": "secret",
+        "subtype": "github_token",
+        "offset_start": 34,
+        "offset_end": 74
+      },
+      {
+        "category": "pii",
+        "subtype": "email",
+        "offset_start": 34,
+        "offset_end": 85
+      }
+    ],
+    "decision": "BLOCK"
+  },
+  {
+    "case_id": "baseline_0183",
+    "findings": [
+      {
+        "category": "secret",
+        "subtype": "aws_access_key",
+        "offset_start": 11,
+        "offset_end": 36
+      }
+    ],
+    "decision": "BLOCK"
+  },
+  {
+    "case_id": "baseline_0184",
+    "findings": [],
+    "decision": "ALLOW"
+  },
+  {
+    "case_id": "baseline_0185",
+    "findings": [
+      {
+        "category": "pii",
+        "subtype": "phone",
+        "offset_start": 44,
+        "offset_end": 60
+      }
+    ],
+    "decision": "REDACT"
+  },
+  {
+    "case_id": "baseline_0186",
+    "findings": [],
+    "decision": "ALLOW"
+  },
+  {
+    "case_id": "baseline_0187",
+    "findings": [
+      {
+        "category": "pii",
+        "subtype": "phone",
+        "offset_start": 19,
+        "offset_end": 35
+      }
+    ],
+    "decision": "REDACT"
+  },
+  {
+    "case_id": "baseline_0188",
+    "findings": [
+      {
+        "category": "secret",
+        "subtype": "db_connection_string",
+        "offset_start": 63,
+        "offset_end": 131
+      },
+      {
+        "category": "pii",
+        "subtype": "email",
+        "offset_start": 81,
+        "offset_end": 119
+      }
+    ],
+    "decision": "BLOCK"
+  },
+  {
+    "case_id": "baseline_0189",
+    "findings": [
+      {
+        "category": "secret",
+        "subtype": "db_connection_string",
+        "offset_start": 63,
+        "offset_end": 131
+      },
+      {
+        "category": "pii",
+        "subtype": "email",
+        "offset_start": 81,
+        "offset_end": 119
+      }
+    ],
+    "decision": "BLOCK"
+  },
+  {
+    "case_id": "baseline_0190",
+    "findings": [
+      {
+        "category": "secret",
+        "subtype": "oauth_token",
+        "offset_start": 40,
+        "offset_end": 77
+      }
+    ],
+    "decision": "BLOCK"
+  },
+  {
+    "case_id": "baseline_0191",
+    "findings": [
+      {
+        "category": "pii",
+        "subtype": "ssn",
+        "offset_start": 48,
+        "offset_end": 59
+      }
+    ],
+    "decision": "BLOCK"
+  },
+  {
+    "case_id": "baseline_0192",
+    "findings": [
+      {
+        "category": "secret",
+        "subtype": "aws_access_key",
+        "offset_start": 63,
+        "offset_end": 83
+      }
+    ],
+    "decision": "BLOCK"
+  },
+  {
+    "case_id": "baseline_0193",
+    "findings": [
+      {
+        "category": "pii",
+        "subtype": "email",
+        "offset_start": 124,
+        "offset_end": 143
+      },
+      {
+        "category": "pii",
+        "subtype": "credit_card",
+        "offset_start": 157,
+        "offset_end": 173
+      }
+    ],
+    "decision": "BLOCK"
+  },
+  {
+    "case_id": "baseline_0194",
+    "findings": [
+      {
+        "category": "secret",
+        "subtype": "aws_access_key",
+        "offset_start": 63,
+        "offset_end": 83
+      }
+    ],
+    "decision": "BLOCK"
+  },
+  {
+    "case_id": "baseline_0195",
+    "findings": [],
+    "decision": "ALLOW"
+  },
+  {
+    "case_id": "baseline_0196",
+    "findings": [
+      {
+        "category": "pii",
+        "subtype": "email",
+        "offset_start": 96,
+        "offset_end": 117
+      }
+    ],
+    "decision": "REDACT"
+  },
+  {
+    "case_id": "baseline_0197",
+    "findings": [
+      {
+        "category": "pii",
+        "subtype": "email",
+        "offset_start": 30,
+        "offset_end": 55
+      }
+    ],
+    "decision": "REDACT"
+  },
+  {
+    "case_id": "baseline_0198",
+    "findings": [
+      {
+        "category": "secret",
+        "subtype": "jwt",
+        "offset_start": 22,
+        "offset_end": 195
+      }
+    ],
+    "decision": "BLOCK"
+  },
+  {
+    "case_id": "baseline_0199",
+    "findings": [
+      {
+        "category": "secret",
+        "subtype": "aws_access_key",
+        "offset_start": 11,
+        "offset_end": 36
+      }
+    ],
+    "decision": "BLOCK"
+  },
+  {
+    "case_id": "baseline_0200",
+    "findings": [
+      {
+        "category": "secret",
+        "subtype": "jwt",
+        "offset_start": 22,
+        "offset_end": 195
+      }
+    ],
+    "decision": "BLOCK"
+  },
+  {
+    "case_id": "baseline_0201",
+    "findings": [
+      {
+        "category": "secret",
+        "subtype": "oauth_token",
+        "offset_start": 67,
+        "offset_end": 219
+      }
+    ],
+    "decision": "BLOCK"
+  },
+  {
+    "case_id": "baseline_0202",
+    "findings": [
+      {
+        "category": "pii",
+        "subtype": "phone",
+        "offset_start": 19,
+        "offset_end": 35
+      }
+    ],
+    "decision": "REDACT"
+  },
+  {
+    "case_id": "baseline_0203",
+    "findings": [
+      {
+        "category": "secret",
+        "subtype": "aws_access_key",
+        "offset_start": 63,
+        "offset_end": 83
+      }
+    ],
+    "decision": "BLOCK"
+  },
+  {
+    "case_id": "baseline_0204",
+    "findings": [],
+    "decision": "ALLOW"
+  },
+  {
+    "case_id": "baseline_0205",
+    "findings": [
+      {
+        "category": "pii",
+        "subtype": "email",
+        "offset_start": 30,
+        "offset_end": 55
+      }
+    ],
+    "decision": "REDACT"
+  },
+  {
+    "case_id": "baseline_0206",
+    "findings": [],
+    "decision": "ALLOW"
+  },
+  {
+    "case_id": "baseline_0207",
+    "findings": [
+      {
+        "category": "pii",
+        "subtype": "phone",
+        "offset_start": 19,
+        "offset_end": 35
+      }
+    ],
+    "decision": "REDACT"
+  },
+  {
+    "case_id": "baseline_0208",
+    "findings": [
+      {
+        "category": "secret",
+        "subtype": "gcp_service_account",
+        "offset_start": 188,
+        "offset_end": 215
+      },
+      {
+        "category": "pii",
+        "subtype": "email",
+        "offset_start": 468,
+        "offset_end": 507
+      }
+    ],
+    "decision": "BLOCK"
+  },
+  {
+    "case_id": "baseline_0209",
+    "findings": [
+      {
+        "category": "secret",
+        "subtype": "ssh_private_key",
+        "offset_start": 0,
+        "offset_end": 35
+      }
+    ],
+    "decision": "BLOCK"
+  },
+  {
+    "case_id": "baseline_0210",
+    "findings": [
+      {
+        "category": "secret",
+        "subtype": "gcp_service_account",
+        "offset_start": 188,
+        "offset_end": 215
+      },
+      {
+        "category": "pii",
+        "subtype": "email",
+        "offset_start": 468,
+        "offset_end": 507
+      }
+    ],
+    "decision": "BLOCK"
+  },
+  {
+    "case_id": "baseline_0211",
+    "findings": [
+      {
+        "category": "pii",
+        "subtype": "email",
+        "offset_start": 27,
+        "offset_end": 56
+      },
+      {
+        "category": "pii",
+        "subtype": "email",
+        "offset_start": 81,
+        "offset_end": 103
+      }
+    ],
+    "decision": "REDACT"
+  },
+  {
+    "case_id": "baseline_0212",
+    "findings": [
+      {
+        "category": "secret",
+        "subtype": "aws_access_key",
+        "offset_start": 63,
+        "offset_end": 83
+      }
+    ],
+    "decision": "BLOCK"
+  },
+  {
+    "case_id": "baseline_0213",
+    "findings": [
+      {
+        "category": "secret",
+        "subtype": "oauth_token",
+        "offset_start": 40,
+        "offset_end": 77
+      }
+    ],
+    "decision": "BLOCK"
+  },
+  {
+    "case_id": "baseline_0214",
+    "findings": [],
+    "decision": "ALLOW"
+  },
+  {
+    "case_id": "baseline_0215",
+    "findings": [],
+    "decision": "ALLOW"
+  },
+  {
+    "case_id": "baseline_0216",
+    "findings": [
+      {
+        "category": "secret",
+        "subtype": "ssh_private_key",
+        "offset_start": 0,
+        "offset_end": 35
+      }
+    ],
+    "decision": "BLOCK"
+  },
+  {
+    "case_id": "baseline_0217",
+    "findings": [
+      {
+        "category": "pii",
+        "subtype": "national_id",
+        "offset_start": 37,
+        "offset_end": 50
+      }
+    ],
+    "decision": "BLOCK"
+  },
+  {
+    "case_id": "baseline_0218",
+    "findings": [
+      {
+        "category": "pii",
+        "subtype": "ssn",
+        "offset_start": 48,
+        "offset_end": 59
+      }
+    ],
+    "decision": "BLOCK"
+  },
+  {
+    "case_id": "baseline_0219",
+    "findings": [
+      {
+        "category": "secret",
+        "subtype": "db_connection_string",
+        "offset_start": 63,
+        "offset_end": 146
+      },
+      {
+        "category": "pii",
+        "subtype": "email",
+        "offset_start": 84,
+        "offset_end": 122
+      }
+    ],
+    "decision": "BLOCK"
+  },
+  {
+    "case_id": "baseline_0220",
+    "findings": [
+      {
+        "category": "secret",
+        "subtype": "ssh_private_key",
+        "offset_start": 0,
+        "offset_end": 35
+      }
+    ],
+    "decision": "BLOCK"
+  },
+  {
+    "case_id": "baseline_0221",
+    "findings": [
+      {
+        "category": "pii",
+        "subtype": "phone",
+        "offset_start": 19,
+        "offset_end": 35
+      }
+    ],
+    "decision": "REDACT"
+  },
+  {
+    "case_id": "baseline_0222",
+    "findings": [
+      {
+        "category": "secret",
+        "subtype": "github_token",
+        "offset_start": 34,
+        "offset_end": 74
+      },
+      {
+        "category": "pii",
+        "subtype": "email",
+        "offset_start": 34,
+        "offset_end": 85
+      }
+    ],
+    "decision": "BLOCK"
+  },
+  {
+    "case_id": "baseline_0223",
+    "findings": [
+      {
+        "category": "secret",
+        "subtype": "github_token",
+        "offset_start": 34,
+        "offset_end": 74
+      },
+      {
+        "category": "pii",
+        "subtype": "email",
+        "offset_start": 34,
+        "offset_end": 85
+      }
+    ],
+    "decision": "BLOCK"
+  },
+  {
+    "case_id": "baseline_0224",
+    "findings": [
+      {
+        "category": "secret",
+        "subtype": "aws_access_key",
+        "offset_start": 11,
+        "offset_end": 36
+      }
+    ],
+    "decision": "BLOCK"
+  },
+  {
+    "case_id": "baseline_0225",
+    "findings": [
+      {
+        "category": "secret",
+        "subtype": "github_token",
+        "offset_start": 34,
+        "offset_end": 74
+      },
+      {
+        "category": "pii",
+        "subtype": "email",
+        "offset_start": 34,
+        "offset_end": 85
+      }
+    ],
+    "decision": "BLOCK"
+  },
+  {
+    "case_id": "baseline_0226",
+    "findings": [],
+    "decision": "ALLOW"
+  },
+  {
+    "case_id": "baseline_0227",
+    "findings": [
+      {
+        "category": "secret",
+        "subtype": "db_connection_string",
+        "offset_start": 63,
+        "offset_end": 131
+      },
+      {
+        "category": "pii",
+        "subtype": "email",
+        "offset_start": 81,
+        "offset_end": 119
+      }
+    ],
+    "decision": "BLOCK"
+  },
+  {
+    "case_id": "baseline_0228",
+    "findings": [
+      {
+        "category": "secret",
+        "subtype": "oauth_token",
+        "offset_start": 43,
+        "offset_end": 78
+      }
+    ],
+    "decision": "BLOCK"
+  },
+  {
+    "case_id": "baseline_0229",
+    "findings": [
+      {
+        "category": "pii",
+        "subtype": "email",
+        "offset_start": 120,
+        "offset_end": 139
+      },
+      {
+        "category": "pii",
+        "subtype": "credit_card",
+        "offset_start": 153,
+        "offset_end": 169
+      }
+    ],
+    "decision": "BLOCK"
+  },
+  {
+    "case_id": "baseline_0230",
+    "findings": [
+      {
+        "category": "secret",
+        "subtype": "jwt",
+        "offset_start": 22,
+        "offset_end": 195
+      }
+    ],
+    "decision": "BLOCK"
+  },
+  {
+    "case_id": "baseline_0231",
+    "findings": [
+      {
+        "category": "pii",
+        "subtype": "phone",
+        "offset_start": 39,
+        "offset_end": 55
+      }
+    ],
+    "decision": "REDACT"
+  },
+  {
+    "case_id": "baseline_0232",
+    "findings": [],
+    "decision": "ALLOW"
+  },
+  {
+    "case_id": "baseline_0233",
+    "findings": [
+      {
+        "category": "secret",
+        "subtype": "azure_key",
+        "offset_start": 88,
+        "offset_end": 132
+      }
+    ],
+    "decision": "BLOCK"
+  },
+  {
+    "case_id": "baseline_0234",
+    "findings": [],
+    "decision": "ALLOW"
+  },
+  {
+    "case_id": "baseline_0235",
+    "findings": [
+      {
+        "category": "secret",
+        "subtype": "aws_access_key",
+        "offset_start": 32,
+        "offset_end": 60
+      }
+    ],
+    "decision": "BLOCK"
+  },
+  {
+    "case_id": "baseline_0236",
+    "findings": [],
+    "decision": "ALLOW"
+  },
+  {
+    "case_id": "baseline_0237",
+    "findings": [],
+    "decision": "ALLOW"
+  },
+  {
+    "case_id": "baseline_0238",
+    "findings": [],
+    "decision": "ALLOW"
+  },
+  {
+    "case_id": "baseline_0239",
+    "findings": [
+      {
+        "category": "pii",
+        "subtype": "email",
+        "offset_start": 27,
+        "offset_end": 53
+      },
+      {
+        "category": "pii",
+        "subtype": "email",
+        "offset_start": 78,
+        "offset_end": 100
+      }
+    ],
+    "decision": "REDACT"
+  },
+  {
+    "case_id": "baseline_0240",
+    "findings": [
+      {
+        "category": "pii",
+        "subtype": "phone",
+        "offset_start": 19,
+        "offset_end": 35
+      }
+    ],
+    "decision": "REDACT"
+  },
+  {
+    "case_id": "baseline_0241",
+    "findings": [],
+    "decision": "ALLOW"
+  },
+  {
+    "case_id": "baseline_0242",
+    "findings": [
+      {
+        "category": "secret",
+        "subtype": "oauth_token",
+        "offset_start": 41,
+        "offset_end": 81
+      }
+    ],
+    "decision": "BLOCK"
+  },
+  {
+    "case_id": "baseline_0243",
+    "findings": [
+      {
+        "category": "secret",
+        "subtype": "jwt",
+        "offset_start": 22,
+        "offset_end": 195
+      }
+    ],
+    "decision": "BLOCK"
+  },
+  {
+    "case_id": "baseline_0244",
+    "findings": [
+      {
+        "category": "secret",
+        "subtype": "aws_access_key",
+        "offset_start": 11,
+        "offset_end": 36
+      }
+    ],
+    "decision": "BLOCK"
+  },
+  {
+    "case_id": "baseline_0245",
+    "findings": [
+      {
+        "category": "pii",
+        "subtype": "ssn",
+        "offset_start": 48,
+        "offset_end": 59
+      }
+    ],
+    "decision": "BLOCK"
+  },
+  {
+    "case_id": "baseline_0246",
+    "findings": [
+      {
+        "category": "secret",
+        "subtype": "oauth_token",
+        "offset_start": 43,
+        "offset_end": 78
+      }
+    ],
+    "decision": "BLOCK"
+  },
+  {
+    "case_id": "baseline_0247",
+    "findings": [
+      {
+        "category": "pii",
+        "subtype": "email",
+        "offset_start": 30,
+        "offset_end": 56
+      }
+    ],
+    "decision": "REDACT"
+  },
+  {
+    "case_id": "baseline_0248",
+    "findings": [
+      {
+        "category": "secret",
+        "subtype": "jwt",
+        "offset_start": 22,
+        "offset_end": 195
+      }
+    ],
+    "decision": "BLOCK"
+  },
+  {
+    "case_id": "baseline_0249",
+    "findings": [
+      {
+        "category": "secret",
+        "subtype": "db_connection_string",
+        "offset_start": 63,
+        "offset_end": 128
+      },
+      {
+        "category": "pii",
+        "subtype": "email",
+        "offset_start": 78,
+        "offset_end": 116
+      }
+    ],
+    "decision": "BLOCK"
+  },
+  {
+    "case_id": "baseline_0250",
+    "findings": [
+      {
+        "category": "secret",
+        "subtype": "aws_access_key",
+        "offset_start": 11,
+        "offset_end": 36
+      }
+    ],
+    "decision": "BLOCK"
+  },
+  {
+    "case_id": "baseline_0251",
+    "findings": [
+      {
+        "category": "pii",
+        "subtype": "email",
+        "offset_start": 96,
+        "offset_end": 117
+      }
+    ],
+    "decision": "REDACT"
+  },
+  {
+    "case_id": "baseline_0252",
+    "findings": [
+      {
+        "category": "secret",
+        "subtype": "jwt",
+        "offset_start": 22,
+        "offset_end": 195
+      }
+    ],
+    "decision": "BLOCK"
+  },
+  {
+    "case_id": "baseline_0253",
+    "findings": [
+      {
+        "category": "pii",
+        "subtype": "email",
+        "offset_start": 27,
+        "offset_end": 51
+      },
+      {
+        "category": "pii",
+        "subtype": "email",
+        "offset_start": 76,
+        "offset_end": 98
+      }
+    ],
+    "decision": "REDACT"
+  },
+  {
+    "case_id": "baseline_0254",
+    "findings": [
+      {
+        "category": "secret",
+        "subtype": "gcp_service_account",
+        "offset_start": 188,
+        "offset_end": 215
+      },
+      {
+        "category": "pii",
+        "subtype": "email",
+        "offset_start": 468,
+        "offset_end": 507
+      }
+    ],
+    "decision": "BLOCK"
+  },
+  {
+    "case_id": "baseline_0255",
+    "findings": [
+      {
+        "category": "secret",
+        "subtype": "jwt",
+        "offset_start": 22,
+        "offset_end": 195
+      }
+    ],
+    "decision": "BLOCK"
+  },
+  {
+    "case_id": "baseline_0256",
+    "findings": [
+      {
+        "category": "secret",
+        "subtype": "oauth_token",
+        "offset_start": 67,
+        "offset_end": 219
+      }
+    ],
+    "decision": "BLOCK"
+  },
+  {
+    "case_id": "baseline_0257",
+    "findings": [
+      {
+        "category": "secret",
+        "subtype": "db_connection_string",
+        "offset_start": 63,
+        "offset_end": 128
+      },
+      {
+        "category": "pii",
+        "subtype": "email",
+        "offset_start": 78,
+        "offset_end": 116
+      }
+    ],
+    "decision": "BLOCK"
+  },
+  {
+    "case_id": "baseline_0258",
+    "findings": [
+      {
+        "category": "secret",
+        "subtype": "github_token",
+        "offset_start": 34,
+        "offset_end": 74
+      },
+      {
+        "category": "pii",
+        "subtype": "email",
+        "offset_start": 34,
+        "offset_end": 85
+      }
+    ],
+    "decision": "BLOCK"
+  },
+  {
+    "case_id": "baseline_0259",
+    "findings": [
+      {
+        "category": "secret",
+        "subtype": "aws_access_key",
+        "offset_start": 63,
+        "offset_end": 83
+      }
+    ],
+    "decision": "BLOCK"
+  },
+  {
+    "case_id": "baseline_0260",
+    "findings": [
+      {
+        "category": "secret",
+        "subtype": "ssh_private_key",
+        "offset_start": 0,
+        "offset_end": 35
+      }
+    ],
+    "decision": "BLOCK"
+  },
+  {
+    "case_id": "baseline_0261",
+    "findings": [
+      {
+        "category": "secret",
+        "subtype": "aws_access_key",
+        "offset_start": 32,
+        "offset_end": 60
+      }
+    ],
+    "decision": "BLOCK"
+  },
+  {
+    "case_id": "baseline_0262",
+    "findings": [
+      {
+        "category": "secret",
+        "subtype": "aws_access_key",
+        "offset_start": 11,
+        "offset_end": 36
+      }
+    ],
+    "decision": "BLOCK"
+  },
+  {
+    "case_id": "baseline_0263",
+    "findings": [
+      {
+        "category": "pii",
+        "subtype": "email",
+        "offset_start": 27,
+        "offset_end": 53
+      },
+      {
+        "category": "pii",
+        "subtype": "email",
+        "offset_start": 78,
+        "offset_end": 100
+      }
+    ],
+    "decision": "REDACT"
+  },
+  {
+    "case_id": "baseline_0264",
+    "findings": [
+      {
+        "category": "pii",
+        "subtype": "phone",
+        "offset_start": 44,
+        "offset_end": 60
+      }
+    ],
+    "decision": "REDACT"
+  },
+  {
+    "case_id": "baseline_0265",
+    "findings": [],
+    "decision": "ALLOW"
+  },
+  {
+    "case_id": "baseline_0266",
+    "findings": [
+      {
+        "category": "pii",
+        "subtype": "email",
+        "offset_start": 96,
+        "offset_end": 117
+      }
+    ],
+    "decision": "REDACT"
+  },
+  {
+    "case_id": "baseline_0267",
+    "findings": [
+      {
+        "category": "secret",
+        "subtype": "gcp_service_account",
+        "offset_start": 188,
+        "offset_end": 215
+      },
+      {
+        "category": "pii",
+        "subtype": "email",
+        "offset_start": 468,
+        "offset_end": 507
+      }
+    ],
+    "decision": "BLOCK"
+  },
+  {
+    "case_id": "baseline_0268",
+    "findings": [
+      {
+        "category": "pii",
+        "subtype": "email",
+        "offset_start": 121,
+        "offset_end": 140
+      },
+      {
+        "category": "pii",
+        "subtype": "credit_card",
+        "offset_start": 154,
+        "offset_end": 170
+      }
+    ],
+    "decision": "BLOCK"
+  },
+  {
+    "case_id": "baseline_0269",
+    "findings": [],
+    "decision": "ALLOW"
+  },
+  {
+    "case_id": "baseline_0270",
+    "findings": [],
+    "decision": "ALLOW"
+  },
+  {
+    "case_id": "baseline_0271",
+    "findings": [
+      {
+        "category": "pii",
+        "subtype": "national_id",
+        "offset_start": 37,
+        "offset_end": 50
+      }
+    ],
+    "decision": "BLOCK"
+  },
+  {
+    "case_id": "baseline_0272",
+    "findings": [
+      {
+        "category": "pii",
+        "subtype": "email",
+        "offset_start": 30,
+        "offset_end": 55
+      }
+    ],
+    "decision": "REDACT"
+  },
+  {
+    "case_id": "baseline_0273",
+    "findings": [
+      {
+        "category": "secret",
+        "subtype": "db_connection_string",
+        "offset_start": 63,
+        "offset_end": 146
+      },
+      {
+        "category": "pii",
+        "subtype": "email",
+        "offset_start": 84,
+        "offset_end": 122
+      }
+    ],
+    "decision": "BLOCK"
+  },
+  {
+    "case_id": "baseline_0274",
+    "findings": [
+      {
+        "category": "pii",
+        "subtype": "email",
+        "offset_start": 55,
+        "offset_end": 72
+      },
+      {
+        "category": "pii",
+        "subtype": "phone",
+        "offset_start": 73,
+        "offset_end": 86
+      }
+    ],
+    "decision": "BLOCK"
+  },
+  {
+    "case_id": "baseline_0275",
+    "findings": [
+      {
+        "category": "pii",
+        "subtype": "email",
+        "offset_start": 56,
+        "offset_end": 73
+      },
+      {
+        "category": "pii",
+        "subtype": "phone",
+        "offset_start": 74,
+        "offset_end": 87
+      }
+    ],
+    "decision": "BLOCK"
+  },
+  {
+    "case_id": "baseline_0276",
+    "findings": [
+      {
+        "category": "pii",
+        "subtype": "email",
+        "offset_start": 27,
+        "offset_end": 55
+      },
+      {
+        "category": "pii",
+        "subtype": "email",
+        "offset_start": 80,
+        "offset_end": 102
+      }
+    ],
+    "decision": "REDACT"
+  },
+  {
+    "case_id": "baseline_0277",
+    "findings": [],
+    "decision": "ALLOW"
+  },
+  {
+    "case_id": "baseline_0278",
+    "findings": [
+      {
+        "category": "secret",
+        "subtype": "oauth_token",
+        "offset_start": 67,
+        "offset_end": 219
+      }
+    ],
+    "decision": "BLOCK"
+  },
+  {
+    "case_id": "baseline_0279",
+    "findings": [],
+    "decision": "ALLOW"
+  },
+  {
+    "case_id": "baseline_0280",
+    "findings": [
+      {
+        "category": "secret",
+        "subtype": "db_connection_string",
+        "offset_start": 63,
+        "offset_end": 146
+      },
+      {
+        "category": "pii",
+        "subtype": "email",
+        "offset_start": 84,
+        "offset_end": 122
+      }
+    ],
+    "decision": "BLOCK"
+  },
+  {
+    "case_id": "baseline_0281",
+    "findings": [
+      {
+        "category": "secret",
+        "subtype": "github_token",
+        "offset_start": 34,
+        "offset_end": 74
+      },
+      {
+        "category": "pii",
+        "subtype": "email",
+        "offset_start": 34,
+        "offset_end": 85
+      }
+    ],
+    "decision": "BLOCK"
+  },
+  {
+    "case_id": "baseline_0282",
+    "findings": [
+      {
+        "category": "pii",
+        "subtype": "email",
+        "offset_start": 30,
+        "offset_end": 56
+      }
+    ],
+    "decision": "REDACT"
+  },
+  {
+    "case_id": "baseline_0283",
+    "findings": [
+      {
+        "category": "pii",
+        "subtype": "email",
+        "offset_start": 27,
+        "offset_end": 54
+      },
+      {
+        "category": "pii",
+        "subtype": "email",
+        "offset_start": 79,
+        "offset_end": 101
+      }
+    ],
+    "decision": "REDACT"
+  },
+  {
+    "case_id": "baseline_0284",
+    "findings": [],
+    "decision": "ALLOW"
+  },
+  {
+    "case_id": "baseline_0285",
+    "findings": [
+      {
+        "category": "pii",
+        "subtype": "email",
+        "offset_start": 27,
+        "offset_end": 53
+      },
+      {
+        "category": "pii",
+        "subtype": "email",
+        "offset_start": 78,
+        "offset_end": 100
+      }
+    ],
+    "decision": "REDACT"
+  },
+  {
+    "case_id": "baseline_0286",
+    "findings": [
+      {
+        "category": "pii",
+        "subtype": "phone",
+        "offset_start": 39,
+        "offset_end": 55
+      }
+    ],
+    "decision": "REDACT"
+  },
+  {
+    "case_id": "baseline_0287",
+    "findings": [
+      {
+        "category": "secret",
+        "subtype": "jwt",
+        "offset_start": 22,
+        "offset_end": 195
+      }
+    ],
+    "decision": "BLOCK"
+  },
+  {
+    "case_id": "baseline_0288",
+    "findings": [
+      {
+        "category": "secret",
+        "subtype": "gcp_service_account",
+        "offset_start": 188,
+        "offset_end": 215
+      },
+      {
+        "category": "pii",
+        "subtype": "email",
+        "offset_start": 468,
+        "offset_end": 507
+      }
+    ],
+    "decision": "BLOCK"
+  },
+  {
+    "case_id": "baseline_0289",
+    "findings": [
+      {
+        "category": "secret",
+        "subtype": "azure_key",
+        "offset_start": 88,
+        "offset_end": 132
+      }
+    ],
+    "decision": "BLOCK"
+  },
+  {
+    "case_id": "baseline_0290",
+    "findings": [
+      {
+        "category": "pii",
+        "subtype": "national_id",
+        "offset_start": 37,
+        "offset_end": 50
+      }
+    ],
+    "decision": "BLOCK"
+  },
+  {
+    "case_id": "baseline_0291",
+    "findings": [
+      {
+        "category": "pii",
+        "subtype": "national_id",
+        "offset_start": 37,
+        "offset_end": 50
+      }
+    ],
+    "decision": "BLOCK"
+  },
+  {
+    "case_id": "baseline_0292",
+    "findings": [
+      {
+        "category": "pii",
+        "subtype": "email",
+        "offset_start": 27,
+        "offset_end": 52
+      },
+      {
+        "category": "pii",
+        "subtype": "email",
+        "offset_start": 77,
+        "offset_end": 99
+      }
+    ],
+    "decision": "REDACT"
+  },
+  {
+    "case_id": "baseline_0293",
+    "findings": [
+      {
+        "category": "secret",
+        "subtype": "aws_access_key",
+        "offset_start": 32,
+        "offset_end": 60
+      }
+    ],
+    "decision": "BLOCK"
+  },
+  {
+    "case_id": "baseline_0294",
+    "findings": [
+      {
+        "category": "secret",
+        "subtype": "github_token",
+        "offset_start": 34,
+        "offset_end": 74
+      },
+      {
+        "category": "pii",
+        "subtype": "email",
+        "offset_start": 34,
+        "offset_end": 85
+      }
+    ],
+    "decision": "BLOCK"
+  },
+  {
+    "case_id": "baseline_0295",
+    "findings": [
+      {
+        "category": "pii",
+        "subtype": "phone",
+        "offset_start": 19,
+        "offset_end": 35
+      }
+    ],
+    "decision": "REDACT"
+  },
+  {
+    "case_id": "baseline_0296",
+    "findings": [
+      {
+        "category": "secret",
+        "subtype": "github_token",
+        "offset_start": 34,
+        "offset_end": 74
+      },
+      {
+        "category": "pii",
+        "subtype": "email",
+        "offset_start": 34,
+        "offset_end": 85
+      }
+    ],
+    "decision": "BLOCK"
+  },
+  {
+    "case_id": "baseline_0297",
+    "findings": [
+      {
+        "category": "pii",
+        "subtype": "phone",
+        "offset_start": 19,
+        "offset_end": 35
+      }
+    ],
+    "decision": "REDACT"
+  },
+  {
+    "case_id": "baseline_0298",
+    "findings": [
+      {
+        "category": "pii",
+        "subtype": "phone",
+        "offset_start": 39,
+        "offset_end": 55
+      }
+    ],
+    "decision": "REDACT"
+  },
+  {
+    "case_id": "baseline_0299",
+    "findings": [
+      {
+        "category": "secret",
+        "subtype": "azure_key",
+        "offset_start": 88,
+        "offset_end": 132
+      }
+    ],
+    "decision": "BLOCK"
+  },
+  {
+    "case_id": "baseline_0300",
+    "findings": [],
+    "decision": "ALLOW"
+  },
+  {
+    "case_id": "baseline_0301",
+    "findings": [
+      {
+        "category": "secret",
+        "subtype": "azure_key",
+        "offset_start": 88,
+        "offset_end": 132
+      }
+    ],
+    "decision": "BLOCK"
+  },
+  {
+    "case_id": "baseline_0302",
+    "findings": [],
+    "decision": "ALLOW"
+  },
+  {
+    "case_id": "baseline_0303",
+    "findings": [
+      {
+        "category": "pii",
+        "subtype": "phone",
+        "offset_start": 19,
+        "offset_end": 35
+      }
+    ],
+    "decision": "REDACT"
+  },
+  {
+    "case_id": "baseline_0304",
+    "findings": [
+      {
+        "category": "secret",
+        "subtype": "github_token",
+        "offset_start": 34,
+        "offset_end": 74
+      },
+      {
+        "category": "pii",
+        "subtype": "email",
+        "offset_start": 34,
+        "offset_end": 85
+      }
+    ],
+    "decision": "BLOCK"
+  },
+  {
+    "case_id": "baseline_0305",
+    "findings": [
+      {
+        "category": "secret",
+        "subtype": "aws_access_key",
+        "offset_start": 63,
+        "offset_end": 83
+      }
+    ],
+    "decision": "BLOCK"
+  },
+  {
+    "case_id": "baseline_0306",
+    "findings": [
+      {
+        "category": "secret",
+        "subtype": "azure_key",
+        "offset_start": 88,
+        "offset_end": 132
+      }
+    ],
+    "decision": "BLOCK"
+  },
+  {
+    "case_id": "baseline_0307",
+    "findings": [],
+    "decision": "ALLOW"
+  },
+  {
+    "case_id": "baseline_0308",
+    "findings": [],
+    "decision": "ALLOW"
+  },
+  {
+    "case_id": "baseline_0309",
+    "findings": [
+      {
+        "category": "secret",
+        "subtype": "github_token",
+        "offset_start": 34,
+        "offset_end": 74
+      },
+      {
+        "category": "pii",
+        "subtype": "email",
+        "offset_start": 34,
+        "offset_end": 85
+      }
+    ],
+    "decision": "BLOCK"
+  },
+  {
+    "case_id": "baseline_0310",
+    "findings": [
+      {
+        "category": "secret",
+        "subtype": "gcp_service_account",
+        "offset_start": 188,
+        "offset_end": 215
+      },
+      {
+        "category": "pii",
+        "subtype": "email",
+        "offset_start": 468,
+        "offset_end": 507
+      }
+    ],
+    "decision": "BLOCK"
+  },
+  {
+    "case_id": "baseline_0311",
+    "findings": [
+      {
+        "category": "secret",
+        "subtype": "oauth_token",
+        "offset_start": 40,
+        "offset_end": 77
+      }
+    ],
+    "decision": "BLOCK"
+  },
+  {
+    "case_id": "baseline_0312",
+    "findings": [
+      {
+        "category": "secret",
+        "subtype": "ssh_private_key",
+        "offset_start": 0,
+        "offset_end": 35
+      }
+    ],
+    "decision": "BLOCK"
+  },
+  {
+    "case_id": "baseline_0313",
+    "findings": [
+      {
+        "category": "pii",
+        "subtype": "email",
+        "offset_start": 125,
+        "offset_end": 144
+      },
+      {
+        "category": "pii",
+        "subtype": "credit_card",
+        "offset_start": 158,
+        "offset_end": 174
+      }
+    ],
+    "decision": "BLOCK"
+  },
+  {
+    "case_id": "baseline_0314",
+    "findings": [
+      {
+        "category": "secret",
+        "subtype": "aws_access_key",
+        "offset_start": 11,
+        "offset_end": 36
+      }
+    ],
+    "decision": "BLOCK"
+  },
+  {
+    "case_id": "baseline_0315",
+    "findings": [
+      {
+        "category": "pii",
+        "subtype": "email",
+        "offset_start": 30,
+        "offset_end": 55
+      }
+    ],
+    "decision": "REDACT"
+  },
+  {
+    "case_id": "baseline_0316",
+    "findings": [
+      {
+        "category": "pii",
+        "subtype": "national_id",
+        "offset_start": 37,
+        "offset_end": 50
+      }
+    ],
+    "decision": "BLOCK"
+  },
+  {
+    "case_id": "baseline_0317",
+    "findings": [
+      {
+        "category": "pii",
+        "subtype": "email",
+        "offset_start": 27,
+        "offset_end": 53
+      },
+      {
+        "category": "pii",
+        "subtype": "email",
+        "offset_start": 78,
+        "offset_end": 100
+      }
+    ],
+    "decision": "REDACT"
+  },
+  {
+    "case_id": "baseline_0318",
+    "findings": [
+      {
+        "category": "pii",
+        "subtype": "ssn",
+        "offset_start": 48,
+        "offset_end": 59
+      }
+    ],
+    "decision": "BLOCK"
+  },
+  {
+    "case_id": "baseline_0319",
+    "findings": [
+      {
+        "category": "secret",
+        "subtype": "db_connection_string",
+        "offset_start": 63,
+        "offset_end": 131
+      },
+      {
+        "category": "pii",
+        "subtype": "email",
+        "offset_start": 81,
+        "offset_end": 119
+      }
+    ],
+    "decision": "BLOCK"
+  },
+  {
+    "case_id": "baseline_0320",
+    "findings": [
+      {
+        "category": "pii",
+        "subtype": "email",
+        "offset_start": 30,
+        "offset_end": 57
+      }
+    ],
+    "decision": "REDACT"
+  }
+]

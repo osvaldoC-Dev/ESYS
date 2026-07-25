@@ -13,9 +13,6 @@ npm-debug.log*
 .env
 *.local
 
-# Eval / benchmark outputs (may contain sensitive test data)
-detector/eval/results/*
-!detector/eval/results/.gitkeep
 benchmarks/latency-results/*
 !benchmarks/latency-results/.gitkeep
 
