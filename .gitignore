@@ -1,0 +1,23 @@
+# Python
+__pycache__/
+*.pyc
+.venv/
+*.egg-info/
+.pytest_cache/
+
+# Node
+node_modules/
+npm-debug.log*
+
+# Env / secrets
+.env
+*.local
+
+# Eval / benchmark outputs (may contain sensitive test data)
+detector/eval/results/*
+!detector/eval/results/.gitkeep
+benchmarks/latency-results/*
+!benchmarks/latency-results/.gitkeep
+
+# OS / editor
+.DS_Store

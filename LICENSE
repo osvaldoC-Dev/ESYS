@@ -1,0 +1,6 @@
+TODO: choose a license.
+
+Note: the free/OSS layer (`esys watch`) and the paid layer (SDK + Gateway)
+may end up under different licenses once they're split into separate
+repos. Until then, this is a placeholder — do not treat this repo as
+licensed for external use yet.

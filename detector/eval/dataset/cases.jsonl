@@ -1,0 +1,3 @@
+{"id": "example-001", "payload": "Here is my AWS key: AKIAIOSFODNN7EXAMPLE", "should_flag": true, "category": "secret"}
+{"id": "example-002", "payload": "Contact me at jane.doe@example.com for details", "should_flag": true, "category": "pii"}
+{"id": "example-003", "payload": "Please summarize the attached quarterly report", "should_flag": false, "category": "none"}
