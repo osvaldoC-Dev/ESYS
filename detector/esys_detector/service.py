@@ -49,7 +49,11 @@ class Handler(BaseHTTPRequestHandler):
 
         findings = detect_secrets(payload) + detect_pii(payload)
         decision = decide(payload, findings)
-        self._send_json(200, {"action": decision["action"], "finding_count": len(findings)})
+        self._send_json(200, {
+            "action": decision["action"],
+            "finding_count": len(findings),
+            "redacted_payload": decision.get("redacted_payload"),
+        })
 
     def log_message(self, fmt, *args):
         print(f"{self.address_string()} - {fmt % args}")
