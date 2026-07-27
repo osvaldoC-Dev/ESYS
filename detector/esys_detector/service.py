@@ -17,6 +17,7 @@ from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 from esys_detector.detectors.secrets import detect_secrets
 from esys_detector.detectors.pii import detect_pii
 from esys_detector.policy import decide
+from esys_detector.audit_log import log_block
 
 PORT = int(os.environ.get("ESYS_DETECTOR_PORT", "8787"))
 
@@ -49,10 +50,16 @@ class Handler(BaseHTTPRequestHandler):
 
         findings = detect_secrets(payload) + detect_pii(payload)
         decision = decide(payload, findings)
+
+        entry_id = None
+        if decision["action"] == "BLOCK":
+            entry_id = log_block(payload, findings)
+
         self._send_json(200, {
             "action": decision["action"],
             "finding_count": len(findings),
             "redacted_payload": decision.get("redacted_payload"),
+            "audit_id": entry_id,
         })
 
     def log_message(self, fmt, *args):

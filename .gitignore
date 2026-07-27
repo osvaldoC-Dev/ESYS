@@ -18,3 +18,4 @@ benchmarks/latency-results/*
 
 # OS / editor
 .DS_Store
+detector/eval/results/blocked_log.jsonl
