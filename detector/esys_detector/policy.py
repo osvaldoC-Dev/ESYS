@@ -20,12 +20,7 @@ def _looks_structured(payload: str) -> bool:
 
 
 def _redact(payload: str, findings: list[dict]) -> str:
-    """Replace each finding's span with a [REDACTED:subtype] placeholder.
-
-    Processes findings from the end of the payload backwards so that
-    replacing one span never shifts the offsets of the findings still to
-    be processed.
-    """
+    """Replace each finding's span with a [REDACTED:subtype] placeholder."""
     ordered = sorted(findings, key=lambda f: f["offset_start"], reverse=True)
     redacted = payload
     for f in ordered:
@@ -38,7 +33,10 @@ def decide(payload: str, findings: list[dict]) -> dict:
     if not findings:
         return {"action": "ALLOW", "findings": findings, "redacted_payload": None}
 
-    block_subtypes = {"national_id", "ssn", "credit_card"}
+    block_subtypes = {
+        "national_id", "ssn", "credit_card",
+        "cpf_br", "national_id_za", "nin_ng", "iban_eu",
+    }
     has_secret = any(f["category"] == "secret" for f in findings)
     has_block_pii = any(f["subtype"] in block_subtypes for f in findings)
 
