@@ -95,8 +95,9 @@ def _iban_valid(iban: str) -> bool:
 def detect_pii(payload: str) -> list[dict]:
     findings = []
 
-    for m in EMAIL_RE.finditer(payload):
-        findings.append(_finding("email", m.start(), m.end()))
+    if "@" in payload:
+        for m in EMAIL_RE.finditer(payload):
+            findings.append(_finding("email", m.start(), m.end()))
 
     for m in PHONE_RE.finditer(payload):
         findings.append(_finding("phone", m.start(), m.end()))
