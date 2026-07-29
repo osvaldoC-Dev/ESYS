@@ -8,19 +8,39 @@ Policy engine. Rule (derived from the labeled dataset, not guessed):
   - no findings                                  -> ALLOW
 """
 
-import re
-
-STRUCTURED_HINT_RE = re.compile(r'[{\[].*".*":.*[}\]]|,\w.*,\w.*,', re.DOTALL)
-
 
 def _looks_structured(payload: str) -> bool:
     """Heuristic: payload contains a JSON object/array or a comma-delimited
-    row (CSV-like), as opposed to plain prose or a log line."""
-    return bool(STRUCTURED_HINT_RE.search(payload))
+    row (CSV-like), as opposed to plain prose or a log line.
+
+    Uses plain substring/count checks instead of a chained-wildcard regex
+    on purpose: a pattern like `[{\\[].*".*":.*[}\\]]` looks harmless but is
+    catastrophically slow (multi-second to unbounded hangs) on adversarial
+    input such as `'{"key":' * 30000` — three sequential unbounded `.*`
+    groups create combinatorial backtracking when the expected closing
+    bracket never appears. Plain string ops here are O(n), no exceptions.
+    """
+    has_bracket = "{" in payload or "[" in payload
+    has_json_kv = '":' in payload
+    if has_bracket and has_json_kv:
+        return True
+
+    # CSV-like: at least one line with 2+ commas (a real row of fields),
+    # checked per line so a single huge line of commas can't blow up cost.
+    for line in payload.split("\n"):
+        if line.count(",") >= 2:
+            return True
+
+    return False
 
 
 def _redact(payload: str, findings: list[dict]) -> str:
-    """Replace each finding's span with a [REDACTED:subtype] placeholder."""
+    """Replace each finding's span with a [REDACTED:subtype] placeholder.
+
+    Processes findings from the end of the payload backwards so that
+    replacing one span never shifts the offsets of the findings still to
+    be processed.
+    """
     ordered = sorted(findings, key=lambda f: f["offset_start"], reverse=True)
     redacted = payload
     for f in ordered:
