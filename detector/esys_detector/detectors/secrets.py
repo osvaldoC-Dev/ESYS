@@ -33,9 +33,14 @@ B64_CANDIDATE_RE = re.compile(r"[A-Za-z0-9+/]{24,}={0,2}")
 # fixed-format secrets like AWS keys where we can validate the joined result)
 STR_CONCAT_RE = re.compile(r'"([A-Z0-9]{6,})"\s*\+\s*"([A-Z0-9]{6,})"')
 
-# Multi-turn-within-payload gap: the specific fragmented-token phrasing
+# Multi-turn-within-payload gap: the specific fragmented-token phrasing.
+# Bounded quantifiers on purpose: \S+ combined with an unbounded .*? that
+# must find a literal further ahead is a classic O(n^2) backtracking trap
+# when "rest is:" never appears (confirmed: unbounded version hangs on
+# adversarial input). Real fragments and the gap between them are always
+# short, so these bounds don't affect legitimate matches.
 MULTI_TURN_RE = re.compile(
-    r"part of a key:\s*(\S+).*?rest is:\s*(\S+)", re.DOTALL
+    r"part of a key:\s*(\S{1,200}).{0,2000}?rest is:\s*(\S{1,200})", re.DOTALL
 )
 
 
