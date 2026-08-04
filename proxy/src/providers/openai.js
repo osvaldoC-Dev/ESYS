@@ -1,23 +1,29 @@
+import { detokenize } from "../tokenize.js";
+
 const OPENAI_BASE_URL = process.env.OPENAI_BASE_URL || "https://api.openai.com/v1";
 
 /**
  * Forwards an already-inspected request body to OpenAI.
  *
- * V1 does not inspect the response (see docs: Non-goals) — only the
- * outbound request is inspected. This function just needs to correctly
- * relay whatever shape of response the client asked for:
- *   - req.body.stream === true  -> OpenAI replies as Server-Sent Events
- *     (text/event-stream); we must keep the connection open and forward
- *     each chunk as it arrives, not buffer the whole thing.
- *   - otherwise                 -> a single JSON response, as before.
+ * V1 does not inspect the response for NEW findings (see docs: Non-goals)
+ * — but if the outbound request was tokenized (redact), we do reverse
+ * those specific tokens back to their real values in the response, so the
+ * user sees a normal, coherent reply instead of literal "ESYS_TOK_xxxx"
+ * strings. The real values never left this process.
  *
- * Before this fix, the code always called response.json() regardless of
- * whether streaming was requested — which breaks (or silently returns
- * garbage) the moment a client sends stream: true, since OpenAI's actual
- * response in that case isn't JSON, it's an SSE stream.
+ * Handles both response shapes:
+ *   - req.body.stream === true  -> OpenAI replies as Server-Sent Events
+ *     (text/event-stream). NOTE: token reversal is NOT applied on the
+ *     streaming path yet — a token could be split across two chunks,
+ *     which needs a small buffering strategy we haven't built. Streaming
+ *     responses are relayed as-is for now; this is a known, deliberate
+ *     scope gap, not an oversight.
+ *   - otherwise                 -> a single JSON response; token reversal
+ *     is applied here, since we have the full text at once.
  */
 export async function forwardToOpenAI(req, res) {
   const isStreaming = req.body?.stream === true;
+  const tokenMap = req.esysTokenMap ?? null;
 
   try {
     const response = await fetch(`${OPENAI_BASE_URL}/chat/completions`, {
@@ -31,6 +37,13 @@ export async function forwardToOpenAI(req, res) {
 
     if (!isStreaming) {
       const data = await response.json();
+      if (tokenMap && data?.choices) {
+        for (const choice of data.choices) {
+          if (choice.message?.content) {
+            choice.message.content = detokenize(choice.message.content, tokenMap);
+          }
+        }
+      }
       return res.status(response.status).json(data);
     }
 

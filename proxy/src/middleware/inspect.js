@@ -54,7 +54,9 @@ export async function inspectMiddleware(req, res, next) {
       case "redact": {
         const redactedParts = (result.redacted_payload ?? payload).split(BOUNDARY);
         req.body.messages = messages.map((m, i) => ({ ...m, content: redactedParts[i] ?? m.content }));
+        req.esysTokenMap = result.token_map ?? null;
         return next();
+  
       }
       case "allow":
       default:

@@ -59,6 +59,7 @@ class Handler(BaseHTTPRequestHandler):
             "action": decision["action"],
             "finding_count": len(findings),
             "redacted_payload": decision.get("redacted_payload"),
+            "token_map": decision.get("token_map"),
             "audit_id": entry_id,
         })
 

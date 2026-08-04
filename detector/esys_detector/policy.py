@@ -8,6 +8,8 @@ Policy engine. Rule (derived from the labeled dataset, not guessed):
   - no findings                                  -> ALLOW
 """
 
+import secrets as _secrets_module
+
 
 def _looks_structured(payload: str) -> bool:
     """Heuristic: payload contains a JSON object/array or a comma-delimited
@@ -25,8 +27,6 @@ def _looks_structured(payload: str) -> bool:
     if has_bracket and has_json_kv:
         return True
 
-    # CSV-like: at least one line with 2+ commas (a real row of fields),
-    # checked per line so a single huge line of commas can't blow up cost.
     for line in payload.split("\n"):
         if line.count(",") >= 2:
             return True
@@ -34,24 +34,36 @@ def _looks_structured(payload: str) -> bool:
     return False
 
 
-def _redact(payload: str, findings: list[dict]) -> str:
-    """Replace each finding's span with a [REDACTED:subtype] placeholder.
+def _tokenize(payload: str, findings: list[dict]) -> tuple[str, dict]:
+    """Replace each finding's span with a unique reversible token, instead
+    of a static [REDACTED:subtype] placeholder.
 
-    Processes findings from the end of the payload backwards so that
-    replacing one span never shifts the offsets of the findings still to
-    be processed.
+    Why this exists: a static placeholder loses information the model
+    might have needed ("reply to this email" breaks once the email is
+    gone). A reversible token lets the model see *something* in that
+    position — enough to keep the conversation coherent — while the real
+    value never leaves this process. The mapping is returned so the
+    caller (the proxy) can substitute the real value back into the
+    provider's response before it reaches the user, and then discard the
+    mapping. It is never written to disk or logged.
+
+    Processes findings back-to-front so replacing one span never shifts
+    the offsets of the findings still to be processed.
     """
     ordered = sorted(findings, key=lambda f: f["offset_start"], reverse=True)
-    redacted = payload
+    tokenized = payload
+    token_map: dict[str, str] = {}
     for f in ordered:
-        placeholder = f"[REDACTED:{f['subtype']}]"
-        redacted = redacted[: f["offset_start"]] + placeholder + redacted[f["offset_end"] :]
-    return redacted
+        original_value = payload[f["offset_start"]:f["offset_end"]]
+        token = f"ESYS_TOK_{_secrets_module.token_hex(4)}"
+        token_map[token] = original_value
+        tokenized = tokenized[: f["offset_start"]] + token + tokenized[f["offset_end"] :]
+    return tokenized, token_map
 
 
 def decide(payload: str, findings: list[dict]) -> dict:
     if not findings:
-        return {"action": "ALLOW", "findings": findings, "redacted_payload": None}
+        return {"action": "ALLOW", "findings": findings, "redacted_payload": None, "token_map": None}
 
     block_subtypes = {
         "national_id", "ssn", "credit_card",
@@ -61,9 +73,15 @@ def decide(payload: str, findings: list[dict]) -> dict:
     has_block_pii = any(f["subtype"] in block_subtypes for f in findings)
 
     if has_secret or has_block_pii:
-        return {"action": "BLOCK", "findings": findings, "redacted_payload": None}
+        return {"action": "BLOCK", "findings": findings, "redacted_payload": None, "token_map": None}
 
     if _looks_structured(payload):
-        return {"action": "BLOCK", "findings": findings, "redacted_payload": None}
+        return {"action": "BLOCK", "findings": findings, "redacted_payload": None, "token_map": None}
 
-    return {"action": "REDACT", "findings": findings, "redacted_payload": _redact(payload, findings)}
+    tokenized_payload, token_map = _tokenize(payload, findings)
+    return {
+        "action": "REDACT",
+        "findings": findings,
+        "redacted_payload": tokenized_payload,
+        "token_map": token_map,
+    }
