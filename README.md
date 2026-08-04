@@ -1,4 +1,4 @@
-# ESYS — AI Egress Gateway
+# ESYS AI Egress Gateway
 
 ESYS inspects outbound requests to AI model providers (OpenAI, Anthropic,
 Gemini, ...) before they're sent, and enforces a policy decision: allow,
