@@ -47,16 +47,28 @@ def _tokenize(payload: str, findings: list[dict]) -> tuple[str, dict]:
     provider's response before it reaches the user, and then discard the
     mapping. It is never written to disk or logged.
 
+    The same original value always gets the same token within one call —
+    e.g. if an email appears twice in the same payload, both occurrences
+    get the same ESYS_TOK_xxxx, not two different ones. Without this, the
+    model would see what looks like two unrelated values where there was
+    actually one, breaking exactly the coherence tokenization exists to
+    preserve (e.g. "my email is X... confirm X is correct" needs both X's
+    to look identical to the model).
+
     Processes findings back-to-front so replacing one span never shifts
     the offsets of the findings still to be processed.
     """
     ordered = sorted(findings, key=lambda f: f["offset_start"], reverse=True)
     tokenized = payload
     token_map: dict[str, str] = {}
+    value_to_token: dict[str, str] = {}
     for f in ordered:
         original_value = payload[f["offset_start"]:f["offset_end"]]
-        token = f"ESYS_TOK_{_secrets_module.token_hex(4)}"
-        token_map[token] = original_value
+        token = value_to_token.get(original_value)
+        if token is None:
+            token = f"ESYS_TOK_{_secrets_module.token_hex(4)}"
+            value_to_token[original_value] = token
+            token_map[token] = original_value
         tokenized = tokenized[: f["offset_start"]] + token + tokenized[f["offset_end"] :]
     return tokenized, token_map
 
