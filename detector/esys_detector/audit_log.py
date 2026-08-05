@@ -35,14 +35,22 @@ def log_block(payload: str, findings: list[dict]) -> str:
 
 
 def load_all() -> list[dict]:
+    """Lê todas as entradas do log. Uma linha corrompida (ex: escrita
+    interrompida a meio, edição manual malfeita) é ignorada com um aviso,
+    em vez de rebentar o comando inteiro — perder 1 entrada é muito menos
+    grave do que tornar todo o resto do registo ilegível."""
     if not os.path.exists(LOG_PATH):
         return []
     entries = []
     with open(LOG_PATH, encoding="utf-8") as f:
-        for line in f:
+        for line_num, line in enumerate(f, start=1):
             line = line.strip()
-            if line:
+            if not line:
+                continue
+            try:
                 entries.append(json.loads(line))
+            except json.JSONDecodeError:
+                print(f"aviso: linha {line_num} do log de auditoria está corrompida, a ignorar")
     return entries
 
 
