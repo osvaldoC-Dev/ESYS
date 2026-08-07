@@ -20,3 +20,4 @@ benchmarks/latency-results/*
 .DS_Store
 detector/eval/results/blocked_log.jsonl
 *.lnk
+*.lnk
