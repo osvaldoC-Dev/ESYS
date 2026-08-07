@@ -21,3 +21,4 @@ benchmarks/latency-results/*
 detector/eval/results/blocked_log.jsonl
 *.lnk
 *.lnk
+*.lnk
