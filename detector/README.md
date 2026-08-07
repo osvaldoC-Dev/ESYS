@@ -34,6 +34,8 @@ anywhere.
 
 Validated against a 320-case labeled dataset: **100% recall, 0% false
 positives.** See the root `README.md` for the full methodology.
+**Testing this for the founder?** See `TESTING.md` for what to actually
+try and how to report what you find.
 
 ## Install
 
