@@ -1,4 +1,5 @@
 import { detokenize } from "../tokenize.js";
+import { relaySSEStream } from "../stream_relay.js";
 
 const OPENAI_BASE_URL = process.env.OPENAI_BASE_URL || "https://api.openai.com/v1";
 
@@ -13,13 +14,9 @@ const OPENAI_BASE_URL = process.env.OPENAI_BASE_URL || "https://api.openai.com/v
  *
  * Handles both response shapes:
  *   - req.body.stream === true  -> OpenAI replies as Server-Sent Events
- *     (text/event-stream). NOTE: token reversal is NOT applied on the
- *     streaming path yet — a token could be split across two chunks,
- *     which needs a small buffering strategy we haven't built. Streaming
- *     responses are relayed as-is for now; this is a known, deliberate
- *     scope gap, not an oversight.
+ *     (text/event-stream); relaySSEStream reverses tokens chunk-safely.
  *   - otherwise                 -> a single JSON response; token reversal
- *     is applied here, since we have the full text at once.
+ *     is applied directly, since we have the full text at once.
  */
 export async function forwardToOpenAI(req, res) {
   const isStreaming = req.body?.stream === true;
@@ -58,17 +55,7 @@ export async function forwardToOpenAI(req, res) {
     res.setHeader("Connection", "keep-alive");
     res.flushHeaders?.();
 
-    const reader = response.body.getReader();
-    const decoder = new TextDecoder();
-    try {
-      while (true) {
-        const { done, value } = await reader.read();
-        if (done) break;
-        res.write(decoder.decode(value, { stream: true }));
-      }
-    } finally {
-      res.end();
-    }
+    await relaySSEStream(response.body, res, tokenMap);
   } catch (err) {
     console.error("forwardToOpenAI error:", err);
     if (!res.headersSent) {
