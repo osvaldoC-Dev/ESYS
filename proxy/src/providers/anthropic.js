@@ -40,6 +40,14 @@ export function toAnthropicRequest(body) {
 }
 
 export function toOpenAIResponse(anthropicData) {
+  // LIMITAÇÃO CONHECIDA: só blocos type:"text" são extraídos. Se a
+  // Anthropic devolver um bloco tool_use (chamada de ferramenta —
+  // comum em uso real do Claude), esse conteúdo é descartado
+  // silenciosamente aqui, não só ignorado por acidente. Isto não
+  // quebra nada (testado: não há crash, o texto normal continua a
+  // funcionar), mas é uma perda real de informação para quem use tool
+  // calling através da ESYS. Não é escopo do V1 (ver docs: Non-goals),
+  // mas fica documentado para não ser uma surpresa mais tarde.
   const text = (anthropicData.content ?? [])
     .filter((block) => block.type === "text")
     .map((block) => block.text)
@@ -95,6 +103,11 @@ export function translateAnthropicStreamToOpenAIShape(anthropicBody) {
             } else if (parsed.type === "message_stop") {
               controller.enqueue(encoder.encode("data: [DONE]\n\n"));
             }
+            // Mesma limitação conhecida do lado streaming: deltas do tipo
+            // "input_json_delta" (chamadas de ferramentas) não são
+            // extraídos, ficam silenciosamente sem efeito no output.
+            // outros tipos (message_start, content_block_start/stop,
+            // message_delta, ping) não transportam texto -- ignorados.
           }
         }
         controller.close();
