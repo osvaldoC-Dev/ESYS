@@ -16,6 +16,7 @@ from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 
 from esys_detector.detectors.secrets import detect_secrets
 from esys_detector.detectors.pii import detect_pii
+from esys_detector.detectors.prompt_injection import detect_prompt_injection
 from esys_detector.policy import decide
 from esys_detector.audit_log import log_block
 
@@ -48,7 +49,7 @@ class Handler(BaseHTTPRequestHandler):
         except Exception:
             return self._send_json(400, {"error": "invalid_request"})
 
-        findings = detect_secrets(payload) + detect_pii(payload)
+        findings = detect_secrets(payload) + detect_pii(payload) + detect_prompt_injection(payload)
         decision = decide(payload, findings)
 
         entry_id = None

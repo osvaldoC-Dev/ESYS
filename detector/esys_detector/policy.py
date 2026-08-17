@@ -76,15 +76,11 @@ def _tokenize(payload: str, findings: list[dict]) -> tuple[str, dict]:
 def decide(payload: str, findings: list[dict]) -> dict:
     if not findings:
         return {"action": "ALLOW", "findings": findings, "redacted_payload": None, "token_map": None}
-
-    block_subtypes = {
-        "national_id", "ssn", "credit_card",
-        "cpf_br", "national_id_za", "nin_ng", "iban_eu",
-    }
+    block_subtypes = {"national_id", "ssn", "credit_card", "cpf_br", "national_id_za", "nin_ng", "iban_eu"}
     has_secret = any(f["category"] == "secret" for f in findings)
     has_block_pii = any(f["subtype"] in block_subtypes for f in findings)
-
-    if has_secret or has_block_pii:
+    has_prompt_injection = any(f["category"] == "prompt_injection" for f in findings)
+    if has_secret or has_block_pii or has_prompt_injection:
         return {"action": "BLOCK", "findings": findings, "redacted_payload": None, "token_map": None}
 
     if _looks_structured(payload):
