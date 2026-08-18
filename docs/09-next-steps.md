@@ -9,6 +9,11 @@ the project actually is now, not where it started.)*
 2. ~~Build a minimal proxy wired to one provider~~ — done, tested,
    streaming-capable.
 3. ~~Build the latency harness~~ — done, 3.72ms p95 (target <30ms).
+4. ~~Detokenize streaming responses~~ — done. `StreamDetokenizer` buffers
+   the last `TOKEN_LENGTH-1` chars before releasing output, so a token
+   split across SSE chunks is never leaked. Verified with 441 adversarial
+   chunk-split combinations plus a real end-to-end run on both the
+   OpenAI and Anthropic streaming paths (see Current Status).
 
 ## Next, in order
 
@@ -17,11 +22,7 @@ the project actually is now, not where it started.)*
    goal is real prompts/files/logs that weren't designed with this
    detector in mind, to answer the still-open question: does this
    generalize, or did it just learn the exam?
-2. **Detokenize streaming responses.** Known gap: a token can split
-   across two SSE chunks, needs a small buffering strategy before
-   flushing. Not urgent until a real user needs streaming + redaction at
-   the same time.
-3. **Package `esys-watch` for real distribution.** Today it's
+2. **Package `esys-watch` for real distribution.** Today it's
    `git clone` + `pip install -e .` — fine for a technical tester, not
    for the PLG wedge described in Solution. No clipboard/editor
    integration (ruled out deliberately, see below) — the next honest step

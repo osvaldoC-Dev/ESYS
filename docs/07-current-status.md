@@ -18,6 +18,14 @@ ESYS has moved past "will this even work" into "it works, now what."
 - **Streaming support**: the proxy correctly relays Server-Sent Events
   chunk-by-chunk instead of buffering the whole response — required for
   compatibility with how most real AI apps actually call these APIs.
+- **Streaming + redaction together**: token reversal is safe across SSE
+  chunk boundaries — a `ESYS_TOK_xxxx` token is never released to the
+  client split across two network chunks. Verified with 441 adversarial
+  chunk-split combinations (single event cut byte-by-byte, and multi-event
+  streams cut at 6 different network chunk sizes) plus a real end-to-end
+  run through the live proxy on both the OpenAI and Anthropic streaming
+  paths: zero leaked tokens, output byte-identical to the non-streaming
+  detokenization result.
 - **Audit trail**: every BLOCK is logged locally with a reviewable CLI
   (`esys-review`) — a false positive is never silently lost.
 - **`esys-watch`**: an installable CLI (`pip install -e .`) reusing the
@@ -29,10 +37,6 @@ ESYS has moved past "will this even work" into "it works, now what."
 
 ## What's still open, honestly
 
-- Streaming responses are **not** detokenized yet — a raw `ESYS_TOK_xxxx`
-  can leak into a streamed reply if the redacted request also used
-  streaming. Documented, not silently broken; low priority until a real
-  use case needs both at once.
 - Everything above was validated against a synthetic dataset built for
   this purpose, and adversarial inputs *we* constructed. It hasn't been
   tested against real, messy, unpredictable traffic from someone else yet
