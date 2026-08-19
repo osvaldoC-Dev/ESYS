@@ -22,6 +22,7 @@ import sys
 
 from esys_detector.detectors.secrets import detect_secrets
 from esys_detector.detectors.pii import detect_pii
+from esys_detector.detectors.prompt_injection import detect_prompt_injection
 from esys_detector.policy import decide
 
 
@@ -42,7 +43,7 @@ def _print_report(payload: str, findings: list[dict], decision: dict) -> None:
     print("=" * 60)
 
     if not findings:
-        print("Nada encontrado. Nenhum secret ou PII detectado.")
+        print("Nada encontrado. Nenhum secret, PII ou prompt injection detectado.")
     else:
         print(f"{len(findings)} finding(s):\n")
         for f in findings:
@@ -61,15 +62,18 @@ def _print_report(payload: str, findings: list[dict], decision: dict) -> None:
         print("-" * 60)
     elif decision["action"] == "BLOCK":
         print()
-        print("NÃO cola isto num prompt de IA — contém dados sensíveis que não")
-        print("deviam sair da tua máquina.")
+        if any(f["category"] == "prompt_injection" for f in findings):
+            print("NÃO cola isto num prompt de IA — contém padrões de prompt injection.")
+        else:
+            print("NÃO cola isto num prompt de IA — contém dados sensíveis que não")
+            print("deviam sair da tua máquina.")
 
     print("=" * 60)
 
 
 def main() -> None:
     payload = _read_input(sys.argv)
-    findings = detect_secrets(payload) + detect_pii(payload)
+    findings = detect_secrets(payload) + detect_pii(payload) + detect_prompt_injection(payload)
     decision = decide(payload, findings)
 
     _print_report(payload, findings, decision)
