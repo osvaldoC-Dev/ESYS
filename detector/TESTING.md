@@ -47,9 +47,29 @@ without me:
 esys-review show <the-id-it-gave-you>
 ```
 
+## Where your data goes
+
+Everything `esys-watch` blocks gets logged locally, in
+`~/.esys/blocked_log.jsonl` — including the full text that triggered the
+block (not just a summary), so you can review it later if you think it
+was a false positive. None of this gets sent anywhere — not to us, not
+to any server.
+
+The file is created with restricted permissions (only your user can read
+it), and the tool automatically warns you if it detects that this path
+ended up inside a cloud-synced folder (OneDrive, iCloud Drive, Dropbox)
+— because in that case it wouldn't really be "just local" anymore
+without you knowing. If you want, you can point it elsewhere with the
+`ESYS_AUDIT_LOG_PATH` environment variable.
+
+If you want to clean up old entries:
+```bash
+esys-review purge <days>
+# e.g. esys-review purge 30   (removes anything older than 30 days)
+```
+
 ## Known limitations (so you don't report these — already known)
 
-.
 - It's a CLI you run manually — it doesn't watch anything automatically
   yet.
 
