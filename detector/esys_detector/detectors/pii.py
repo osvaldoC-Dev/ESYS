@@ -5,7 +5,7 @@ Coverage by region (this is the "Africa + Brazil + EU + US" expansion —
 not just US/EU like most competitors in this space):
 
   Global    : email, phone, credit_card
-  Angola    : national_id           (existing BI format)
+  Angola    : national_id           (context-gated -- no public checksum exists)
   Brazil    : cpf, cnpj             (with real checksum validation)
   S. Africa : national_id_za        (with Luhn checksum validation)
   Nigeria   : nin                   (context-gated — no public checksum exists)
@@ -23,7 +23,17 @@ import re
 EMAIL_RE = re.compile(r"[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}")
 PHONE_RE = re.compile(r"\+\d{1,3}[\s.-]?\d{2,4}[\s.-]?\d{3}[\s.-]?\d{3,4}")
 SSN_RE = re.compile(r"\b\d{3}-\d{2}-\d{4}\b")
-NATIONAL_ID_RE = re.compile(r"\b\d{9}[A-Z]{2}\d{2,3}\b")  # Angola BI format
+NATIONAL_ID_CONTEXT_RE = re.compile(
+    r"(?:national\s+id|bilhete\s+de\s+identidade|\bBI\b)\D{0,60}(\d{9}[A-Z]{2}\d{2,3})",
+    re.IGNORECASE,
+)  # Angola BI — sem dígito de controlo público e documentado (ao contrário do
+   # BI português). Uma API pública de validação existe, mas usá-la enviaria o
+   # próprio BI real para um servidor de terceiros só para o validar -- o
+   # oposto do que a ESYS existe para evitar. Por isso, tal como o NIN da
+   # Nigéria, exige contexto próximo em vez de confiar só na forma: sem isto,
+   # qualquer código alfanumérico com a mesma forma (referências de encomenda,
+   # números de série) dispara um falso positivo -- confirmado com
+   # "order number 123456789AB99 for tracking".
 CREDIT_CARD_RE = re.compile(r"\b\d{16}\b")
 
 CPF_RE = re.compile(r"\b\d{3}\.\d{3}\.\d{3}-\d{2}\b")
@@ -105,8 +115,8 @@ def detect_pii(payload: str) -> list[dict]:
     for m in SSN_RE.finditer(payload):
         findings.append(_finding("ssn", m.start(), m.end()))
 
-    for m in NATIONAL_ID_RE.finditer(payload):
-        findings.append(_finding("national_id", m.start(), m.end()))
+    for m in NATIONAL_ID_CONTEXT_RE.finditer(payload):
+        findings.append(_finding("national_id", m.start(1), m.end(1)))
 
     for m in CREDIT_CARD_RE.finditer(payload):
         findings.append(_finding("credit_card", m.start(), m.end()))
