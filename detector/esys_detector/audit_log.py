@@ -7,44 +7,74 @@ positivo que impediu um pedido legítimo de passar. Isto é o mínimo
 necessário para resolver isso: persistência simples em ficheiro (JSONL),
 sem precisar de base de dados nem servidor extra.
 
-Ficheiro: eval/results/blocked_log.jsonl (uma linha JSON por bloqueio)
-
-Adicionalmente, se SUPABASE_URL e SUPABASE_SERVICE_KEY estiverem
-definidas, cada bloqueio (e cada aprovação) é TAMBÉM enviado/atualizado
-numa tabela Supabase (esys_events) -- para o dashboard remoto conseguir
-ler os eventos sem precisar de acesso a este disco local. Isto é sempre
-um "extra": o ficheiro local continua a ser a fonte de verdade principal,
-e uma falha a comunicar com o Supabase (rede em baixo, etc.) NUNCA impede
-o bloqueio/aprovação local de funcionar -- só significa que essa cópia
-remota fica desatualizada desta vez.
-
-Nunca envia o payload nem o valor sensível para o Supabase -- só
-metadados (timestamp, categoria, tipo, ação, contagem, status).
+DESIGN DE PRIVACIDADE (decisão consciente, não acidente):
+  - O payload completo (sem máscara) fica guardado localmente. Isto é
+    necessário: sem o conteúdo original, nunca consegues confirmar se um
+    bloqueio foi mesmo um falso positivo. Mascarar ao escrever destruiria
+    a informação que o registo existe para preservar.
+  - "Local" só é uma promessa de privacidade real se for mesmo local —
+    por isso o caminho por omissão fica em ~/.esys/, FORA de qualquer
+    pasta normalmente ligada a um repositório de código (e portanto fora
+    do que costuma ser sincronizado por engano por ferramentas tipo
+    OneDrive quando alguém sincroniza o ambiente de trabalho inteiro).
+  - Mesmo assim, detectamos e avisamos se o caminho final calhar dentro
+    de uma pasta sincronizada conhecida (OneDrive, iCloud Drive,
+    Dropbox) — para o caso de alguém ter o próprio $HOME dentro de uma
+    dessas pastas, o que também acontece na prática.
+  - `esys-review` (listagem) nunca mostra o payload. Só `esys-review show
+    <id>` revela o conteúdo completo — um "--reveal" explícito, não a
+    vista por omissão.
 """
 
 import json
 import os
+import stat
 import urllib.request
 import urllib.error
 import uuid
-from datetime import datetime, timezone
+from datetime import datetime, timezone, timedelta
 
-LOG_PATH = os.path.join(os.path.dirname(__file__), "..", "eval", "results", "blocked_log.jsonl")
+DEFAULT_LOG_PATH = os.path.join(os.path.expanduser("~"), ".esys", "blocked_log.jsonl")
+LOG_PATH = os.environ.get("ESYS_AUDIT_LOG_PATH", DEFAULT_LOG_PATH)
+
+SYNCED_FOLDER_MARKERS = ["onedrive", "icloud drive", "dropbox"]
 
 SUPABASE_URL = os.environ.get("SUPABASE_URL")
 SUPABASE_SERVICE_KEY = os.environ.get("SUPABASE_SERVICE_KEY")
 
+_warned_about_sync = False
+
+
+def _warn_if_synced_path(path: str) -> None:
+    global _warned_about_sync
+    if _warned_about_sync:
+        return
+    normalized = os.path.abspath(path).lower()
+    for marker in SYNCED_FOLDER_MARKERS:
+        if marker in normalized:
+            print(
+                f"aviso: o log de auditoria ({path}) parece estar dentro de uma "
+                f"pasta sincronizada para a cloud ({marker}). Isto pode enviar "
+                f"dados sensíveis para fora desta máquina sem intenção. "
+                f"Considera definir ESYS_AUDIT_LOG_PATH para um caminho fora "
+                f"dessa pasta."
+            )
+            _warned_about_sync = True
+            return
+
+
+def _restrict_permissions(path: str) -> None:
+    try:
+        os.chmod(path, stat.S_IRUSR | stat.S_IWUSR)
+    except OSError:
+        pass
+
 
 def _send_to_supabase(entry: dict) -> None:
-    """Envia o evento para a tabela esys_events do Supabase. Silencioso
-    em qualquer falha -- isto nunca deve impedir o bloqueio local de
-    funcionar."""
     if not SUPABASE_URL or not SUPABASE_SERVICE_KEY:
         return
-
     findings = entry.get("findings") or []
     first = findings[0] if findings else {}
-
     body = {
         "audit_id": entry["id"],
         "timestamp": entry["timestamp"],
@@ -54,7 +84,6 @@ def _send_to_supabase(entry: dict) -> None:
         "action": "BLOCK",
         "finding_count": len(findings),
     }
-
     req = urllib.request.Request(
         f"{SUPABASE_URL}/rest/v1/esys_events",
         data=json.dumps(body).encode("utf-8"),
@@ -73,12 +102,8 @@ def _send_to_supabase(entry: dict) -> None:
 
 
 def _update_status_in_supabase(entry_id: str, status: str) -> None:
-    """Atualiza o status do evento correspondente no Supabase. Silencioso
-    em qualquer falha -- tal como no envio inicial, isto nunca deve
-    impedir a aprovação local de funcionar."""
     if not SUPABASE_URL or not SUPABASE_SERVICE_KEY:
         return
-
     req = urllib.request.Request(
         f"{SUPABASE_URL}/rest/v1/esys_events?audit_id=eq.{entry_id}",
         data=json.dumps({"status": status}).encode("utf-8"),
@@ -97,9 +122,8 @@ def _update_status_in_supabase(entry_id: str, status: str) -> None:
 
 
 def log_block(payload: str, findings: list[dict]) -> str:
-    """Regista um bloqueio (local, sempre) e devolve o ID único da
-    entrada. Também tenta enviar uma cópia para o Supabase, sem deixar
-    isso afetar o resultado desta função."""
+    _warn_if_synced_path(LOG_PATH)
+
     entry_id = str(uuid.uuid4())[:8]
     entry = {
         "id": entry_id,
@@ -111,17 +135,13 @@ def log_block(payload: str, findings: list[dict]) -> str:
     os.makedirs(os.path.dirname(LOG_PATH), exist_ok=True)
     with open(LOG_PATH, "a", encoding="utf-8") as f:
         f.write(json.dumps(entry) + "\n")
+    _restrict_permissions(LOG_PATH)
 
     _send_to_supabase(entry)
-
     return entry_id
 
 
 def load_all() -> list[dict]:
-    """Lê todas as entradas do log. Uma linha corrompida (ex: escrita
-    interrompida a meio, edição manual malfeita) é ignorada com um aviso,
-    em vez de rebentar o comando inteiro — perder 1 entrada é muito menos
-    grave do que tornar todo o resto do registo ilegível."""
     if not os.path.exists(LOG_PATH):
         return []
     entries = []
@@ -138,8 +158,6 @@ def load_all() -> list[dict]:
 
 
 def set_status(entry_id: str, status: str) -> bool:
-    """Atualiza o status de uma entrada (ex: 'pending' -> 'approved').
-    Devolve True se encontrou e atualizou, False se o ID não existe."""
     entries = load_all()
     found = False
     for e in entries:
@@ -150,5 +168,29 @@ def set_status(entry_id: str, status: str) -> bool:
         with open(LOG_PATH, "w", encoding="utf-8") as f:
             for e in entries:
                 f.write(json.dumps(e) + "\n")
+        _restrict_permissions(LOG_PATH)
         _update_status_in_supabase(entry_id, status)
     return found
+
+
+def purge_older_than(days: int) -> int:
+    entries = load_all()
+    cutoff = datetime.now(timezone.utc) - timedelta(days=days)
+    kept = []
+    removed = 0
+    for e in entries:
+        try:
+            ts = datetime.fromisoformat(e["timestamp"])
+        except (KeyError, ValueError):
+            kept.append(e)
+            continue
+        if ts >= cutoff:
+            kept.append(e)
+        else:
+            removed += 1
+    if removed:
+        with open(LOG_PATH, "w", encoding="utf-8") as f:
+            for e in kept:
+                f.write(json.dumps(e) + "\n")
+        _restrict_permissions(LOG_PATH)
+    return removed
