@@ -49,10 +49,7 @@ esys-review show <the-id-it-gave-you>
 
 ## Known limitations (so you don't report these — already known)
 
-- If you use the full proxy (not just `esys-watch`) with streaming
-  responses *and* the request gets redacted, you might see a literal
-  `ESYS_TOK_xxxxxxxx` string in the reply instead of the real value. This
-  is a known gap, not a bug — flagged in the code, fix is planned.
+.
 - It's a CLI you run manually — it doesn't watch anything automatically
   yet.
 
