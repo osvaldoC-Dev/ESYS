@@ -160,7 +160,7 @@ export async function forwardToAnthropic(req, res) {
     res.flushHeaders?.();
 
     const translated = translateAnthropicStreamToOpenAIShape(response.body);
-    await relaySSEStream(translated, res, tokenMap);
+await relaySSEStream(translated, res, tokenMap, req);
   } catch (err) {
     console.error("forwardToAnthropic error:", err);
     if (!res.headersSent) {

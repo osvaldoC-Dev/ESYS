@@ -55,7 +55,7 @@ export async function forwardToOpenAI(req, res) {
     res.setHeader("Connection", "keep-alive");
     res.flushHeaders?.();
 
-    await relaySSEStream(response.body, res, tokenMap);
+await relaySSEStream(response.body, res, tokenMap, req);
   } catch (err) {
     console.error("forwardToOpenAI error:", err);
     if (!res.headersSent) {

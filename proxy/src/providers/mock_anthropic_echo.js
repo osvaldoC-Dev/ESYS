@@ -62,5 +62,5 @@ export async function forwardToMockAnthropicStreamEcho(req, res) {
   res.flushHeaders?.();
 
   const translated = translateAnthropicStreamToOpenAIShape(anthropicSSE);
-  await relaySSEStream(translated, res, tokenMap);
+await relaySSEStream(translated, res, tokenMap, req);
 }

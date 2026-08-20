@@ -29,5 +29,5 @@ export async function forwardToMockStreamEchoProvider(req, res) {
   res.setHeader("Connection", "keep-alive");
   res.flushHeaders?.();
 
-  await relaySSEStream(body, res, tokenMap);
+await relaySSEStream(body, res, tokenMap, req);
 }
