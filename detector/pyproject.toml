@@ -1,8 +1,33 @@
 [project]
-name = "esys-detector"
+name = "esys-watch"
 version = "0.1.0"
-description = "ESYS core detector: secrets + PII detection and policy decisions"
+description = "Catch secrets and PII before you paste them into ChatGPT, Cursor, Copilot, or any AI tool — locally, zero setup, zero account, nothing ever leaves your machine."
+readme = "README.md"
+license = "MIT"
+license-files = ["LICENSE"]
 requires-python = ">=3.11"
+
+authors = [
+    { name = "ESYS Studio", email = "esysstudio@outlook.com" }]
+
+keywords = ["security", "privacy", "pii", "secrets", "llm", "ai-safety", "dlp"]
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Intended Audience :: Developers",
+    "Topic :: Security",
+    "Topic :: Software Development :: Libraries :: Python Modules",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+    "Programming Language :: Python :: 3.14",
+    "Operating System :: OS Independent",
+]
+
+[project.urls]
+Homepage = "https://github.com/osvaldoC-Dev/ESYS"
+Repository = "https://github.com/osvaldoC-Dev/ESYS"
+Issues = "https://github.com/osvaldoC-Dev/ESYS/issues"
 
 [project.scripts]
 esys-watch = "esys_detector.watch:main"

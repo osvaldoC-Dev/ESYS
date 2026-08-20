@@ -22,3 +22,7 @@ detector/eval/results/blocked_log.jsonl
 *.lnk
 *.lnk
 *.lnk
+detector/dist/
+*.egg-info/
+detector/dist/
+*.egg-info/

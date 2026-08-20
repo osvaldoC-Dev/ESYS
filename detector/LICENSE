@@ -20,7 +20,6 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 
----
 
 Note: this MIT license covers the current state of this repository — the
 core detector and `esys-watch` CLI. If/when a paid Gateway/SDK layer is
