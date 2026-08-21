@@ -46,6 +46,8 @@ class Handler(BaseHTTPRequestHandler):
             raw = self.rfile.read(length)
             body = json.loads(raw)
             payload = body["payload"]
+            if not isinstance(payload, str):
+                raise TypeError(f"payload must be a string, got {type(payload).__name__}")
         except Exception:
             return self._send_json(400, {"error": "invalid_request"})
 
