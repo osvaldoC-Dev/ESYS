@@ -29,6 +29,7 @@ DESIGN DE PRIVACIDADE (decisão consciente, não acidente):
 import json
 import os
 import stat
+import time
 import urllib.request
 import urllib.error
 import uuid
@@ -43,6 +44,56 @@ SUPABASE_URL = os.environ.get("SUPABASE_URL")
 SUPABASE_SERVICE_KEY = os.environ.get("SUPABASE_SERVICE_KEY")
 
 _warned_about_sync = False
+
+# Lock cross-plataforma (Windows + POSIX) sem dependências externas: um
+# ficheiro .lock ao lado do log, criado com O_CREAT|O_EXCL (atómico em
+# ambos os SOs). Necessário porque o serviço (append em log_block) e o
+# CLI de review (leitura+reescrita completa em set_status/purge_older_than)
+# correm em PROCESSOS SEPARADOS, sem nenhuma proteção partilhada -- sem
+# isto, confirmado com um teste real (60 appends concorrentes com o
+# serviço vivo + 20 purges a correr ao mesmo tempo num processo à parte):
+# 9 das 60 entradas perdidas silenciosamente (15%), porque uma reescrita
+# completa a meio apaga o que tinha sido acrescentado entretanto.
+_LOCK_TIMEOUT_S = 5
+_LOCK_STALE_S = 30
+
+
+class _FileLock:
+    def __init__(self, path: str):
+        self.lock_path = path + ".lock"
+        self._fd = None
+
+    def __enter__(self):
+        deadline = time.monotonic() + _LOCK_TIMEOUT_S
+        while True:
+            try:
+                self._fd = os.open(self.lock_path, os.O_CREAT | os.O_EXCL | os.O_WRONLY)
+                return self
+            except FileExistsError:
+                try:
+                    age = time.time() - os.path.getmtime(self.lock_path)
+                    if age > _LOCK_STALE_S:
+                        # provavelmente um processo anterior morreu a meio
+                        # (crash) sem largar o lock -- recupera em vez de
+                        # ficar preso para sempre.
+                        os.remove(self.lock_path)
+                        continue
+                except OSError:
+                    continue
+                if time.monotonic() > deadline:
+                    raise TimeoutError(
+                        f"não foi possível obter o lock do audit log em {_LOCK_TIMEOUT_S}s "
+                        f"({self.lock_path})"
+                    )
+                time.sleep(0.02)
+
+    def __exit__(self, exc_type, exc, tb):
+        if self._fd is not None:
+            os.close(self._fd)
+        try:
+            os.remove(self.lock_path)
+        except OSError:
+            pass
 
 
 def _warn_if_synced_path(path: str) -> None:
@@ -133,9 +184,10 @@ def log_block(payload: str, findings: list[dict]) -> str:
         "payload": payload,
     }
     os.makedirs(os.path.dirname(LOG_PATH), exist_ok=True)
-    with open(LOG_PATH, "a", encoding="utf-8") as f:
-        f.write(json.dumps(entry) + "\n")
-    _restrict_permissions(LOG_PATH)
+    with _FileLock(LOG_PATH):
+        with open(LOG_PATH, "a", encoding="utf-8") as f:
+            f.write(json.dumps(entry) + "\n")
+        _restrict_permissions(LOG_PATH)
 
     _send_to_supabase(entry)
     return entry_id
@@ -158,39 +210,42 @@ def load_all() -> list[dict]:
 
 
 def set_status(entry_id: str, status: str) -> bool:
-    entries = load_all()
-    found = False
-    for e in entries:
-        if e["id"] == entry_id:
-            e["status"] = status
-            found = True
+    with _FileLock(LOG_PATH):
+        entries = load_all()
+        found = False
+        for e in entries:
+            if e["id"] == entry_id:
+                e["status"] = status
+                found = True
+        if found:
+            with open(LOG_PATH, "w", encoding="utf-8") as f:
+                for e in entries:
+                    f.write(json.dumps(e) + "\n")
+            _restrict_permissions(LOG_PATH)
     if found:
-        with open(LOG_PATH, "w", encoding="utf-8") as f:
-            for e in entries:
-                f.write(json.dumps(e) + "\n")
-        _restrict_permissions(LOG_PATH)
         _update_status_in_supabase(entry_id, status)
     return found
 
 
 def purge_older_than(days: int) -> int:
-    entries = load_all()
-    cutoff = datetime.now(timezone.utc) - timedelta(days=days)
-    kept = []
-    removed = 0
-    for e in entries:
-        try:
-            ts = datetime.fromisoformat(e["timestamp"])
-        except (KeyError, ValueError):
-            kept.append(e)
-            continue
-        if ts >= cutoff:
-            kept.append(e)
-        else:
-            removed += 1
-    if removed:
-        with open(LOG_PATH, "w", encoding="utf-8") as f:
-            for e in kept:
-                f.write(json.dumps(e) + "\n")
-        _restrict_permissions(LOG_PATH)
+    with _FileLock(LOG_PATH):
+        entries = load_all()
+        cutoff = datetime.now(timezone.utc) - timedelta(days=days)
+        kept = []
+        removed = 0
+        for e in entries:
+            try:
+                ts = datetime.fromisoformat(e["timestamp"])
+            except (KeyError, ValueError):
+                kept.append(e)
+                continue
+            if ts >= cutoff:
+                kept.append(e)
+            else:
+                removed += 1
+        if removed:
+            with open(LOG_PATH, "w", encoding="utf-8") as f:
+                for e in kept:
+                    f.write(json.dumps(e) + "\n")
+            _restrict_permissions(LOG_PATH)
     return removed

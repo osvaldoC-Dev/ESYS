@@ -66,6 +66,9 @@ def cmd_purge(days_str: str) -> None:
     except ValueError:
         print(f"'{days_str}' não é um número válido de dias.")
         sys.exit(2)
+    if days < 0:
+        print(f"'{days}' é negativo -- isso apagaria tudo, incluindo entradas de agora mesmo. Recusado.")
+        sys.exit(2)
     removed = purge_older_than(days)
     print(f"{removed} entrada(s) com mais de {days} dia(s) removida(s) de {LOG_PATH}.")
 
