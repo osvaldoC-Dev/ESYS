@@ -1,5 +1,6 @@
 import { detokenize } from "../tokenize.js";
 import { relaySSEStream } from "../stream_relay.js";
+import { inspectOutput, maskTokens, OUTPUT_BLOCKED_MESSAGE } from "../output_inspection.js";
 
 const ANTHROPIC_BASE_URL = process.env.ANTHROPIC_BASE_URL || "https://api.anthropic.com/v1";
 const ANTHROPIC_VERSION = "2023-06-01";
@@ -102,6 +103,14 @@ export function translateAnthropicStreamToOpenAIShape(anthropicBody) {
               emit(parsed.delta.text);
             } else if (parsed.type === "message_stop") {
               controller.enqueue(encoder.encode("data: [DONE]\n\n"));
+            } else if (parsed.type === "error") {
+              // A Anthropic pode mandar isto a meio de um stream em
+              // curso (ex: overloaded_error sob carga) -- confirmado
+              // com teste que, sem isto, o cliente nunca recebia
+              // [DONE] nem qualquer sinal de que a resposta ficou
+              // incompleta; o stream simplesmente parava em silêncio.
+              console.error("Anthropic stream error mid-response:", parsed.error);
+              controller.enqueue(encoder.encode("data: [DONE]\n\n"));
             }
             // Mesma limitação conhecida do lado streaming: deltas do tipo
             // "input_json_delta" (chamadas de ferramentas) não são
@@ -118,6 +127,12 @@ export function translateAnthropicStreamToOpenAIShape(anthropicBody) {
   });
 }
 
+/**
+ * Non-streaming responses are also inspected on the way OUT now, before
+ * any token reversal — see output_inspection.js for why that order
+ * matters. Streaming output inspection stays out of scope (see the
+ * comment in openai.js for why).
+ */
 export async function forwardToAnthropic(req, res) {
   const isStreaming = req.body?.stream === true;
   const tokenMap = req.esysTokenMap ?? null;
@@ -140,9 +155,16 @@ export async function forwardToAnthropic(req, res) {
         return res.status(response.status).json(data);
       }
       const openaiShaped = toOpenAIResponse(data);
-      if (tokenMap) {
-        for (const choice of openaiShaped.choices) {
-          choice.message.content = detokenize(choice.message.content, tokenMap);
+      for (const choice of openaiShaped.choices) {
+        if (typeof choice.message?.content === "string") {
+          const outputDecision = await inspectOutput(choice.message.content);
+          if (outputDecision.action === "block") {
+            choice.message.content = OUTPUT_BLOCKED_MESSAGE;
+          } else if (outputDecision.action === "redact") {
+            choice.message.content = maskTokens(outputDecision.redacted_payload, outputDecision.token_map);
+          } else if (tokenMap) {
+            choice.message.content = detokenize(choice.message.content, tokenMap);
+          }
         }
       }
       return res.status(response.status).json(openaiShaped);
@@ -160,7 +182,7 @@ export async function forwardToAnthropic(req, res) {
     res.flushHeaders?.();
 
     const translated = translateAnthropicStreamToOpenAIShape(response.body);
-await relaySSEStream(translated, res, tokenMap, req);
+    await relaySSEStream(translated, res, tokenMap, req);
   } catch (err) {
     console.error("forwardToAnthropic error:", err);
     if (!res.headersSent) {

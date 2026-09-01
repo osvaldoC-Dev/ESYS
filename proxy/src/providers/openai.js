@@ -1,22 +1,18 @@
 import { detokenize } from "../tokenize.js";
 import { relaySSEStream } from "../stream_relay.js";
+import { inspectOutput, maskTokens, OUTPUT_BLOCKED_MESSAGE } from "../output_inspection.js";
 
 const OPENAI_BASE_URL = process.env.OPENAI_BASE_URL || "https://api.openai.com/v1";
 
 /**
  * Forwards an already-inspected request body to OpenAI.
  *
- * V1 does not inspect the response for NEW findings (see docs: Non-goals)
- * — but if the outbound request was tokenized (redact), we do reverse
- * those specific tokens back to their real values in the response, so the
- * user sees a normal, coherent reply instead of literal "ESYS_TOK_xxxx"
- * strings. The real values never left this process.
- *
- * Handles both response shapes:
- *   - req.body.stream === true  -> OpenAI replies as Server-Sent Events
- *     (text/event-stream); relaySSEStream reverses tokens chunk-safely.
- *   - otherwise                 -> a single JSON response; token reversal
- *     is applied directly, since we have the full text at once.
+ * Non-streaming responses are now also inspected on the way OUT, before
+ * any token reversal — see output_inspection.js for why that order
+ * matters. Streaming output inspection is a separate, harder problem
+ * (can't "un-send" already-streamed chunks) and is intentionally out of
+ * scope here; streaming responses still only get token reversal, same
+ * as before.
  */
 export async function forwardToOpenAI(req, res) {
   const isStreaming = req.body?.stream === true;
@@ -34,10 +30,17 @@ export async function forwardToOpenAI(req, res) {
 
     if (!isStreaming) {
       const data = await response.json();
-      if (tokenMap && data?.choices) {
+      if (data?.choices) {
         for (const choice of data.choices) {
-          if (choice.message?.content) {
-            choice.message.content = detokenize(choice.message.content, tokenMap);
+          if (typeof choice.message?.content === "string") {
+            const outputDecision = await inspectOutput(choice.message.content);
+            if (outputDecision.action === "block") {
+              choice.message.content = OUTPUT_BLOCKED_MESSAGE;
+            } else if (outputDecision.action === "redact") {
+              choice.message.content = maskTokens(outputDecision.redacted_payload, outputDecision.token_map);
+            } else if (tokenMap) {
+              choice.message.content = detokenize(choice.message.content, tokenMap);
+            }
           }
         }
       }
@@ -55,7 +58,7 @@ export async function forwardToOpenAI(req, res) {
     res.setHeader("Connection", "keep-alive");
     res.flushHeaders?.();
 
-await relaySSEStream(response.body, res, tokenMap, req);
+    await relaySSEStream(response.body, res, tokenMap, req);
   } catch (err) {
     console.error("forwardToOpenAI error:", err);
     if (!res.headersSent) {
