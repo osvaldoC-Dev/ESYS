@@ -28,12 +28,19 @@ ESYS has moved past "will this even work" into "it works, now what."
   detokenization result.
 - **Audit trail**: every BLOCK is logged locally with a reviewable CLI
   (`esys-review`) — a false positive is never silently lost.
-- **`esys-watch`**: an installable CLI (`pip install -e .`) reusing the
-  same validated detector core, for local/individual use before any
-  team-level product exists.
-- 6 real robustness bugs found via adversarial testing and fixed (3
-  ReDoS, 1 token-coherence, 1 information-disclosure, 1 audit-log
-  fragility) — see Metrics for detail.
+- **`esys-watch`**: published to PyPI (`pip install esys-watch`), MIT
+  licensed, zero external dependencies for the CLI path. Includes a
+  `--demo` mode for a zero-friction first try (no file needed).
+- **Prompt injection detection**: pattern-based coverage of classic
+  attacks (goal hijacking, DAN-style jailbreaks, system prompt
+  extraction) — documented as not covering indirect/multi-turn attacks,
+  which need a different approach (see Engineering Hypotheses).
+- **Response inspection (non-streaming)**: the model's reply is scanned
+  for secrets/PII it produced on its own — before token reversal, so the
+  user's own legitimately-returned data is never mistaken for a new
+  leak (verified with a dedicated test proving the ordering is correct).
+- 12+ real robustness bugs found via adversarial testing and fixed,
+  across two rounds — see Metrics for the full list.
 
 ## What's still open, honestly
 
@@ -41,9 +48,9 @@ ESYS has moved past "will this even work" into "it works, now what."
   this purpose, and adversarial inputs *we* constructed. It hasn't been
   tested against real, messy, unpredictable traffic from someone else yet
   — that's the next real test, not this one.
-- No OSS distribution yet beyond "clone the repo and pip install" — no
-  PyPI package, no clipboard/editor integration (deliberately ruled out
-  after a design debate — see Engineering Hypotheses).
+- Streaming responses don't get the new response-inspection scan yet —
+  only non-streaming does (see Scope: Non-goals for why this is a
+  genuinely different problem, not just more code).
 - This is still a one-person project. Every gap above is a sequencing
   choice, not an oversight: prove correctness and resilience before
   distribution, UI, or anything that depends on the core being
